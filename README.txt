@@ -1,1 +1,1 @@
-lorem ipsum asdasdasd
+Gra saper w androidzie
