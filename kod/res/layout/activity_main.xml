@@ -3,6 +3,7 @@
     android:id="@+id/TableLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@drawable/background"
     android:stretchColumns="0,2" >
 
     <TableRow
@@ -19,19 +20,20 @@
             android:textSize="5mm"
             android:layout_column="0"
             android:typeface="normal" />
-
+
         <ImageButton
             android:id="@+id/imageButton1"
             android:layout_width="wrap_content"
-            android:layout_column="1"
             android:layout_height="wrap_content"
+            android:layout_column="1"
             android:src="@drawable/ic_action_search" />
-
+
         <TextView
             android:id="@+id/licznik_min"
-            android:layout_column="2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_column="2"
+            android:layout_gravity="right"
             android:text="@string/wartosc_poczatkowa_licznikow"
             android:textSize="5mm" />
 
