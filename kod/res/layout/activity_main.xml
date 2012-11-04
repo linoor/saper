@@ -1,14 +1,35 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/TableLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
-
-    <TextView
+
+    <TableRow
+        android:id="@+id/tableRow1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world"
-        tools:context=".MainActivity" />
+        android:gravity="center_horizontal" >
+
+        <TextView
+            android:id="@+id/timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wartosc_poczatkowa_licznikow"
+            android:textSize="5mm" />
 
-</RelativeLayout>
+        <ImageButton
+            android:id="@+id/imageButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_search" />
+
+        <TextView
+            android:id="@+id/licznik_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wartosc_poczatkowa_licznikow"
+            android:textSize="5mm" />
+
+    </TableRow>
+
+</TableLayout>
