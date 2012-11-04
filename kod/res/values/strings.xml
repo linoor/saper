@@ -4,7 +4,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="timer">licznik_czasu</string>
     <string name="wartosc_poczatkowa_licznikow">000</string>
 
 </resources>

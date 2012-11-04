@@ -15,11 +15,12 @@ private TextView timer, minecount;
         
         /*tworzenie napisów(liczników)*/
         timer = (TextView) findViewById(R.id.timer);
-        timer = (TextView) findViewById(R.id.licznik_min);
-        /*zmienianie czcionki*/
-        Typeface lcd_font = Typeface.createFromAsset(getAssets(), "fonts/LCDPHONE.ttf");
-        timer.setTypeface(lcd_font);
-        minecount.setTypeface(lcd_font);
+        minecount = (TextView) findViewById(R.id.licznik_min);
+        /*zmienianie czcionki licznikow*/
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/LCDPHONE.ttf");
+        timer.setTypeface(font);
+        minecount.setTypeface(font);
+        
     }
 
     @Override
