@@ -22,7 +22,7 @@
             android:textColor="@color/kolor_licznikow"
             android:textSize="7mm"
             android:typeface="normal" />
-
+
         <ImageButton
             android:id="@+id/imageButton1"
             android:layout_width="wrap_content"
