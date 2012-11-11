@@ -22,13 +22,14 @@
             android:textColor="@color/kolor_licznikow"
             android:textSize="7mm"
             android:typeface="normal" />
-
+
         <ImageButton
             android:id="@+id/imageButton1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
-            android:src="@drawable/smiley" />
+            android:background="android:background=&quot;@null&quot;"
+            android:src="@drawable/128_19" />
 
         <TextView
             android:id="@+id/licznik_min"
