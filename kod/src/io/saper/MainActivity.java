@@ -1,11 +1,14 @@
 package io.saper;
 
+import java.awt.font.NumericShaper;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -16,7 +19,10 @@ private TextView timer, minecount;
 private ImageButton smiley;
 private Block blocks[][];
 private TableLayout pole_minowe;
-private int numer_of_rows = 9;
+private final int number_of_rows = 9;
+private final int number_of_columns = 9;
+private final int szerokosc_pola = 3;
+private final int odstep = 3;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,15 +42,43 @@ private int numer_of_rows = 9;
         
         /*ustawianie pola minowego*/
         pole_minowe = (TableLayout) findViewById(R.id.pole_minowe);
+        
+        // tworzenie pola minowego
+        createMineField();
+        showMineField();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
     }
-    
+    /*tworzy tablelayout i pokazuje pole minowe*/
     private void showMineField()
     {
+    	for(int wiersz = 1; wiersz < number_of_rows + 1; wiersz++)
+    	{
+    		TableRow table = new TableRow(this);
+    		
+    		for(int kolumna = 1; kolumna < number_of_columns + 1; kolumna++)
+    		{
+    			table.addView(blocks[wiersz][kolumna]);
+    		}
+    		pole_minowe.addView(table);
+    	}
+    }
+    /*tworzy pole minowe*/
+    private void createMineField()
+    {
+    	// po 2 dodatkowe wiersze i kolumny (potrzebne do obliczania pobliskich min)
+    	blocks = new Block[number_of_rows + 2][number_of_columns + 2];
     	
+    	//inicjalizowanie pól z minami
+    	for(int wiersz = 0; wiersz < number_of_rows + 2; wiersz++)
+    	{
+    		for(int kolumna = 0; kolumna < number_of_columns + 2; kolumna++)
+    		{
+    			blocks[wiersz][kolumna] = new Block(this);
+    		}
+    	}
     }
 }
