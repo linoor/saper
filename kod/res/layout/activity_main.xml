@@ -22,7 +22,7 @@
             android:textColor="@color/kolor_licznikow"
             android:textSize="7mm"
             android:typeface="normal" />
-
+
         <ImageButton
             android:id="@+id/imageButton1"
             android:layout_width="wrap_content"
@@ -40,6 +40,14 @@
             android:text="@string/wartosc_poczatkowa_licznikow"
             android:textColor="@color/kolor_licznikow"
             android:textSize="7mm" />
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="50px" >
 
     </TableRow>
 
