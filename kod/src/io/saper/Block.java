@@ -17,7 +17,7 @@ public class Block extends Button
 		numberOfMinesSurrounding = 0;
 		
 		// ustawianie t³a pola
-		this.setBackgroundResource(R.drawable.test);
+		this.setBackgroundResource(R.drawable.tlo_pola);
 	}
 	public boolean isCovered()
 	{

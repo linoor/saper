@@ -19,9 +19,9 @@ private TextView timer, minecount;
 private ImageButton smiley;
 private Block blocks[][];
 private TableLayout pole_minowe;
-private final int number_of_rows = 9;
-private final int number_of_columns = 9;
-private final int szerokosc_pola = 3;
+private final int number_of_rows = 5;
+private final int number_of_columns = 5;
+private final int szerokosc_pola = 30;
 private final int odstep = 3;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,12 +58,18 @@ private final int odstep = 3;
     	for(int wiersz = 1; wiersz < number_of_rows + 1; wiersz++)
     	{
     		TableRow table = new TableRow(this);
+    		table.setLayoutParams(new TableRow.LayoutParams((szerokosc_pola + 2 * odstep) * number_of_columns, szerokosc_pola + 2 * odstep));
     		
     		for(int kolumna = 1; kolumna < number_of_columns + 1; kolumna++)
     		{
+    			blocks[wiersz][kolumna].setLayoutParams(new TableRow.LayoutParams(  
+    					szerokosc_pola + 2 * odstep,  
+    					szerokosc_pola + 2 * odstep));
+    			blocks[wiersz][kolumna].setPadding(odstep, odstep, odstep, odstep);
     			table.addView(blocks[wiersz][kolumna]);
     		}
-    		pole_minowe.addView(table);
+    		pole_minowe.addView(table,new TableLayout.LayoutParams(  
+					(szerokosc_pola + 2 * odstep) * number_of_columns, szerokosc_pola + 2 * odstep));;
     	}
     }
     /*tworzy pole minowe*/
