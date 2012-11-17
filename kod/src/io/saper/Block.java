@@ -23,4 +23,9 @@ public class Block extends Button
 	{
 		return isCovered;
 	}
+	public void uncover()
+	{
+		isCovered = true;
+		this.setBackgroundResource(R.drawable.szara);
+	}
 }

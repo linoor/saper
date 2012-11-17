@@ -94,10 +94,13 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
 		{
 			blocks[wiersz][kolumna] = new Block(this);
 			
+			// ustawiamy na final, ¿eby przekazaæ do klas anonimowych listenerów
+			final int currentRow = wiersz;
+			final int currentColumn = kolumna;
+			
 			// tutaj mo¿na zaimplementowaæ co siê dzieje po krótkim klikniêciu
 			blocks[wiersz][kolumna].setOnClickListener(new OnClickListener()
 			{
-
 				public void onClick(View v)
 				{
 					// jeœli zegar nie rozpocz¹³ odliczania, rozpocznij odliczanie
@@ -105,6 +108,11 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
 					{
 						startTimer();
 						isTimerstarted = true;
+					}
+					
+					if(blocks[currentRow][currentColumn].isCovered())
+					{
+						blocks[currentRow][currentColumn].uncover();
 					}
 				}
 				
@@ -127,11 +135,12 @@ private Runnable updateTime = new Runnable()
 {
    public void run()
     {
-    		long odliczanie = System.currentTimeMillis();
+    		long czasRozpoczeciaZadania = System.currentTimeMillis();
     		czas++; // odliczamy jedna sekundê
     		zegar.setText(String.format("%03d", czas)); // update zegara
     		
-    		timer.postAtTime(this, odliczanie);
+    		// ustaw zadanie na czas rozpoczecia zadania, a nastêpnie opóŸnij go o sekundê
+    		timer.postAtTime(this, czasRozpoczeciaZadania);
     		timer.postDelayed(updateTime, 1000);
     }
 };
