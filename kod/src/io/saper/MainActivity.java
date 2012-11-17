@@ -93,6 +93,23 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
 		for(int kolumna = 0; kolumna < number_of_columns + 2; kolumna++)
 		{
 			blocks[wiersz][kolumna] = new Block(this);
+			
+			// tutaj mo¿na zaimplementowaæ co siê dzieje po krótkim klikniêciu
+			blocks[wiersz][kolumna].setOnClickListener(new OnClickListener()
+			{
+
+				public void onClick(View v)
+				{
+					// jeœli zegar nie rozpocz¹³ odliczania, rozpocznij odliczanie
+					if(!isTimerstarted)
+					{
+						startTimer();
+						isTimerstarted = true;
+					}
+				}
+				
+			});
+			
 		}
 	}
 }
@@ -102,7 +119,7 @@ public void startTimer()
 	if(czas == 0)
 	{
 		timer.removeCallbacks(updateTime);
-		timer.postDelayed(updateTime, 1000);
+		timer.postDelayed(updateTime, 500);
 	}
 }
 // Zadanie stworzone na potrzeby zegara ( klasa anonimowa )
@@ -112,7 +129,7 @@ private Runnable updateTime = new Runnable()
     {
     		long odliczanie = System.currentTimeMillis();
     		czas++; // odliczamy jedna sekundê
-    		zegar.setText(Integer.toString(czas)); // update zegara
+    		zegar.setText(String.format("%03d", czas)); // update zegara
     		
     		timer.postAtTime(this, odliczanie);
     		timer.postDelayed(updateTime, 1000);
