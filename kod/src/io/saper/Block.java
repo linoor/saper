@@ -19,13 +19,34 @@ public class Block extends Button
 		// ustawianie t³a pola
 		this.setBackgroundResource(R.drawable.tlo_pola);
 	}
+	/** sprawdza czy pole jest odkryte */
 	public boolean isCovered()
 	{
 		return isCovered;
 	}
+	/** odkrywa pole */
 	public void uncover()
 	{
-		isCovered = true;
+		if(!isCovered)
+		{
+			return;
+		}
+		isCovered = false;
 		this.setBackgroundResource(R.drawable.szara);
+	}
+	/** ustawia mine */
+	public void setMine()
+	{
+		isMined = true;
+	}
+	/** sprawdza czy pod polem jest mina */
+	public boolean isMined()
+	{
+		return isMined;
+	}
+	/** ustawia liczbê min dooko³a pola */
+	public void setMinesSurrounding(int n)
+	{
+		numberOfMinesSurrounding = n;
 	}
 }

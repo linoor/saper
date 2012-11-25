@@ -1,6 +1,7 @@
 package io.saper;
 
 import java.awt.font.NumericShaper;
+import java.util.Random;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,13 +25,15 @@ private int number_of_rows = 9;
 private int number_of_columns = 9;
 private int wielkosc_pola = 15;
 private final int odstep = 3;
-private int minesToFind; // pozosta³e do znalezienia miny
+private int minesToFind = 10; // pozosta³e do znalezienia miny
+/** maksymalna liczba min */
+private int minesTotal = 10;
 
 private Handler timer = new Handler();
 private int czas = 0;
 
-private boolean isTimerstarted; // jeœli true, to znaczy, ¿e zegar rozpocz¹³ odliczanie
-private boolean areMinesSet; // jeœli true, to znaczy, ¿e miny zosta³y ustawione
+private boolean isTimerstarted = false; // jeœli true, to znaczy, ¿e zegar rozpocz¹³ odliczanie
+private boolean areMinesSet = false; // jeœli true, to znaczy, ¿e miny zosta³y ustawione
 private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,7 +64,7 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
     }
-    /*tworzy tablelayout i pokazuje pole minowe*/
+    /**tworzy tablelayout i pokazuje pole minowe*/
     private void showMineField()
     {
     	for(int wiersz = 1; wiersz < number_of_rows + 1; wiersz++)
@@ -81,7 +84,7 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
 					(wielkosc_pola + 2 * odstep) * number_of_columns, wielkosc_pola + 2 * odstep));;
     	}
     }
-    /*tworzy pole minowe*/
+    /**tworzy pole minowe*/
     private void createMineField()
 {
  // po 2 dodatkowe wiersze i kolumny (potrzebne do obliczania pobliskich min)
@@ -121,7 +124,7 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
 		}
 	}
 }
-// rozpoczyna odliczanie czasu
+/** rozpoczyna odliczanie czasu */
 public void startTimer()
 {
 	if(czas == 0)
@@ -130,7 +133,7 @@ public void startTimer()
 		timer.postDelayed(updateTime, 500);
 	}
 }
-// Zadanie stworzone na potrzeby zegara ( klasa anonimowa )
+/** Zadanie stworzone na potrzeby zegara ( klasa anonimowa )*/
 private Runnable updateTime = new Runnable()
 {
    public void run()
@@ -144,4 +147,59 @@ private Runnable updateTime = new Runnable()
     		timer.postDelayed(updateTime, 1000);
     }
 };
+/** metoda ustawiaj¹ca miny na losowe miejsca */
+public void setMines()
+{
+	Random rand = new Random();
+	
+	int randomRow, randomColumn;
+	
+	randomRow = rand.nextInt(number_of_rows);
+	randomColumn = rand.nextInt(number_of_columns);
+	
+	// losujemy miejsce dla min tyle razy ile ma byæ min
+	for(int i = 0; i < minesTotal; i++)
+	{
+		// sprawdzamy czy na miejscu juz jest jakas mina
+		if(blocks[randomRow + 1][randomColumn + 1].isMined())
+		{
+			i--;
+		}
+		blocks[randomRow + 1][randomColumn + 1].setMine();
+	}
+	
+	// obliczanie ilosci min dookola pól
+	
+	int nearbyMines;
+	
+	for(int row = 0; row < number_of_rows + 2; row++)
+	{
+		for(int column = 0; column < number_of_columns + 2; column++)
+		{
+			nearbyMines = 0;
+			
+			// nie szukamy dla pierwszego i ostatniego rzêdu i kolumny (s¹ to rzêdy i kolumny pomocnicze)
+			if((row != 0) && (row != (number_of_rows + 1)) && (column != 0) && (column != (number_of_columns + 1)))
+			{
+				// szukamy dooko³a pola
+				for(int poprzedni_r = -1; poprzedni_r < 2; poprzedni_r++)
+				{
+					for(int poprzedni_k = -1; poprzedni_k < 2; poprzedni_k++)
+					{
+						if(blocks[row + poprzedni_r][column + poprzedni_k].isMined())
+						{
+							nearbyMines++;
+						}
+					}
+				}
+				
+				// ustaw znalezion¹ liczbê min do pamiêci pola
+				blocks[row][column].setMinesSurrounding(nearbyMines);
+			}
+		}
+	}
+	
+	
+}
+
 }
