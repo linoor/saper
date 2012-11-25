@@ -124,7 +124,10 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
 					// jeœli pole nie jest zaznaczone flag¹
 					if(!blocks[currentRow][currentColumn].isFlagged())
 					{
-						
+						if(blocks[currentRow][currentColumn].isMined())
+						{
+							blocks[currentRow][currentColumn].setMineIcon();
+						}
 						
 						if(blocks[currentRow][currentColumn].isCovered())
 						{

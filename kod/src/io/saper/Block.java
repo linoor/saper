@@ -78,4 +78,10 @@ public class Block extends Button
 		}
 		
 	}
+	/** Ustawia ikonkê miny */
+	public void setMineIcon()
+	{
+		setText("M");
+		setTextColor(Color.RED);
+	}
 }
