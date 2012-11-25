@@ -10,6 +10,7 @@ import android.graphics.Typeface;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.TableLayout;
@@ -43,6 +44,7 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
         /*tworzenie napisów(liczników)*/
         zegar = (TextView) findViewById(R.id.timer);
         minecount = (TextView) findViewById(R.id.licznik_min);
+        minecount.setText(String.format("%03d", minesTotal));
         
         /*tworzenie referencji do przycisku*/
         smiley = (ImageButton) findViewById(R.id.imageButton1);
@@ -113,14 +115,59 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
 						isTimerstarted = true;
 					}
 					
-					if(blocks[currentRow][currentColumn].isCovered())
+					if(!areMinesSet)
 					{
-						blocks[currentRow][currentColumn].uncover();
+						setMines();
+						areMinesSet = true;
+					}
+					
+					// jeœli pole nie jest zaznaczone flag¹
+					if(!blocks[currentRow][currentColumn].isFlagged())
+					{
+						
+						
+						if(blocks[currentRow][currentColumn].isCovered())
+						{
+							blocks[currentRow][currentColumn].uncover();
+						}
 					}
 				}
 				
 			});
 			
+			
+			// tutaj mo¿na zaimplementowaæ co siê dzieje po d³ugim klikniêciu
+			blocks[wiersz][kolumna].setOnLongClickListener(new OnLongClickListener()
+				{
+					
+					public boolean onLongClick(View v)
+					{
+						if(!blocks[currentRow][currentColumn].isFlagged() && minesToFind >= 1)
+						{
+							// zmiejszamy liczbê min do znalezienia
+							minesToFind--;
+							// ustawiamy ikonkê flagi
+							blocks[currentRow][currentColumn].setFlagIcon(true);
+							// ustawiamy znacznik
+							blocks[currentRow][currentColumn].setFlagged(true);
+							// update minecount
+							updateMineCount();
+							
+						}
+						else if(blocks[currentRow][currentColumn].isFlagged())
+						{
+							// zwiêkszamy liczbê min do znalezienia
+							minesToFind++;
+							// zmieniamy ikonke
+							blocks[currentRow][currentColumn].setFlagIcon(false);
+							// ustawiamy znacznik
+							blocks[currentRow][currentColumn].setFlagged(false);
+							// update mineCount
+							updateMineCount();
+						}
+						return true;
+					}
+				});
 		}
 	}
 }
@@ -154,18 +201,20 @@ public void setMines()
 	
 	int randomRow, randomColumn;
 	
-	randomRow = rand.nextInt(number_of_rows);
-	randomColumn = rand.nextInt(number_of_columns);
 	
 	// losujemy miejsce dla min tyle razy ile ma byæ min
 	for(int i = 0; i < minesTotal; i++)
 	{
+		
+		randomRow = rand.nextInt(number_of_rows) + 1;
+		randomColumn = rand.nextInt(number_of_columns) + 1;
+		
 		// sprawdzamy czy na miejscu juz jest jakas mina
-		if(blocks[randomRow + 1][randomColumn + 1].isMined())
+		if(blocks[randomRow][randomColumn].isMined())
 		{
 			i--;
 		}
-		blocks[randomRow + 1][randomColumn + 1].setMine();
+		blocks[randomRow][randomColumn].setMine();
 	}
 	
 	// obliczanie ilosci min dookola pól
@@ -198,8 +247,12 @@ public void setMines()
 			}
 		}
 	}
-	
-	
+}
+
+/** funkcja ustawiaj¹ca liczbê min */
+public void updateMineCount()
+{
+	minecount.setText(String.format("%03d", minesToFind));
 }
 
 }
