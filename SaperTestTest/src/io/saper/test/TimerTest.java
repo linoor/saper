@@ -7,12 +7,12 @@ import com.jayway.android.robotium.solo.Solo;
 import io.saper.MainActivity;
 import android.test.ActivityInstrumentationTestCase2;
 
-public class IkonkaTest extends ActivityInstrumentationTestCase2<MainActivity>
+public class TimerTest extends ActivityInstrumentationTestCase2<MainActivity>
 {
 
 	private Solo solo;
 	
-	public IkonkaTest()
+	public TimerTest()
 	{
 		super("io.saper", MainActivity.class);
 	}
