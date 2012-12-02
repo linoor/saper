@@ -32,14 +32,8 @@ public class IkonkaTest extends ActivityInstrumentationTestCase2<MainActivity>
 	{
 		// klikamy na jakis przycisk
 		solo.clickOnButton(5);
-		// odczekujemy sekundê
-		synchronized (solo)
-		{
-			solo.wait(1100);
-		}
 		// sprawdzamy czy zegar ruszy³
-		int timer = Integer.valueOf(solo.getText(0).toString());
-		Assert.assertTrue(timer > 0);
+		solo.waitForText("001", 1, 3);
 	
 	}
 
