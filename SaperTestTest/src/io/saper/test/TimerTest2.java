@@ -7,17 +7,18 @@ import junit.framework.Assert;
 
 import com.jayway.android.robotium.solo.Solo;
 
+import io.saper.Block;
 import io.saper.MainActivity;
 import io.saper.R;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.TextView;
 
-public class TimerTest extends ActivityInstrumentationTestCase2<MainActivity>
+public class TimerTest2 extends ActivityInstrumentationTestCase2<MainActivity>
 {
 
 	private Solo solo;
 	
-	public TimerTest()
+	public TimerTest2()
 	{
 		super("io.saper", MainActivity.class);
 	}
@@ -35,16 +36,14 @@ public class TimerTest extends ActivityInstrumentationTestCase2<MainActivity>
 	
 	public void testTimer() throws InterruptedException
 	{
+		// sprawdzamy czy zegar ruszy³ i prawid³owo wskazuje czas
 		Random rand = new Random();
-		int nr = rand.nextInt(81);
 		TextView zegar = (TextView) solo.getView(R.id.timer);
-		// klikamy na jakis przycisk
-		solo.clickOnButton(nr);
-		solo.sleep(1000);
-		// sprawdzamy czy zegar ruszy³
-		String co_zegar=(zegar.getText()).toString();
-		Assert.assertEquals("001", co_zegar);
-	
+		Block block = (Block) solo.getButton(rand.nextInt(9*9));
+		solo.clickOnView(block);
+		solo.sleep(100000);
+		String co_licznik=(zegar.getText()).toString();
+		Assert.assertEquals("100", co_licznik);
 	}
 
 }
