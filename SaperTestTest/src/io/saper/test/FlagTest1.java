@@ -42,11 +42,11 @@ public class FlagTest1 extends ActivityInstrumentationTestCase2<MainActivity>
 		// losuje punkt
 		while(oflagowany){
 			block = (Block) solo.getButton(rand.nextInt(9*9));
-			zaminowany=block.isMined();
 			oflagowany=block.isFlagged();
 		}
 		//klika krótko
 		solo.clickOnView(block);
+		zaminowany=block.isMined();
 		boolean odminowany = solo.waitForText("M", 1, 20);
 		//sprawdzi, czy pole licznika wskazuje teraz 000
 		TextView licznik = (TextView) solo.getView(R.id.licznik_min);
