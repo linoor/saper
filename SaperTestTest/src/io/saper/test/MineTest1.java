@@ -38,19 +38,11 @@ public class MineTest1 extends ActivityInstrumentationTestCase2<MainActivity>
 	{
 		Random rand = new Random();
 		int nr = rand.nextInt(81);
-		//TextView zegar = (TextView) solo.getView(R.id.timer);
-		// klikamy na jakis przycisk
 		Block block = (Block) solo.getButton(nr);
-		boolean zaminowany = block.isMined();
 		solo.clickOnView(block);
+		boolean zaminowany = block.isMined();
 		boolean odminowany = solo.waitForText("M", 1, 20);
-		//solo.sleep(1000);
-		// sprawdzamy czy zegar ruszy³
-		//String co_zegar=(zegar.getText()).toString();
-		//Assert.assertEquals("001", co_zegar);
-		//Assert.assertEquals(true, block.isCovered());
-		Assert.assertEquals(zaminowany, odminowany);
-	
+		Assert.assertEquals(zaminowany,odminowany);
 	}
 
 }
