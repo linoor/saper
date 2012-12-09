@@ -183,6 +183,11 @@ public void startTimer()
 		timer.postDelayed(updateTime, 500);
 	}
 }
+/** funkcja zatrzymuj¹ca czas */
+public void stopTimer()
+{
+	timer.removeCallbacks(updateTime);
+}
 /** Zadanie stworzone na potrzeby zegara ( klasa anonimowa )*/
 private Runnable updateTime = new Runnable()
 {
@@ -277,6 +282,14 @@ public boolean checkWin()
 		}
 	}
 	return true;
+}
+/** funkcja koñcz¹ca obecn¹ grê
+ * 
+ */
+public void endGame()
+{
+	isGameOver = true;
+	
 }
 
 }
