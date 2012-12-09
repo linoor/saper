@@ -53,6 +53,17 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
         
         /*tworzenie referencji do przycisku*/
         smiley = (ImageButton) findViewById(R.id.imageButton1);
+        // ustawianie klikniêcia przy buŸce
+        smiley.setOnClickListener(new OnClickListener()
+        {
+
+			public void onClick(View v)
+			{
+				endGame();
+				startNewGame();
+			}
+        	
+        });
         
         /*zmienianie czcionki licznikow*/
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/LCDM2B__.TTF");
