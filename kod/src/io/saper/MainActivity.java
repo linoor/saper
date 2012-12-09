@@ -98,6 +98,8 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
         showMineField();
         
         minesToFind = minesTotal;
+        //poprawne wyswietlanie liczby min
+        minecount.setText(String.format("%03d", minesTotal));
         isGameOver = false;
         czas = 0;
     }
@@ -346,6 +348,8 @@ public void gameWin()
 	smiley.setBackgroundResource(R.drawable.smiech);
 	
 	activateButtons(false);
+	//niech wyzeruje licznik min!
+	minecount.setText("000");
 	
 	showDialogBox("Gratulacje, wygra³eœ!",czas,true);
 	
@@ -361,7 +365,8 @@ public void gameLose()
 	smiley.setBackgroundResource(R.drawable.placz);
 	
 	activateButtons(false);
-	
+	//dodalam, bo tutaj chcemy, by wyzerowalo licznik 
+	minecount.setText("000");
 	
 	showDialogBox("Niestety, przegra³eœ!", czas, false);
 	
@@ -404,7 +409,6 @@ public void endGame()
 	isGameOver = true;
 	stopTimer();
 	zegar.setText("000");
-	minecount.setText("000");
 	isTimerstarted = false;
 	areMinesSet = false;
 	isGameOver = false;
