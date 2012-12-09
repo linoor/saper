@@ -151,6 +151,7 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
 						if(blocks[currentRow][currentColumn].isMined())
 						{
 							blocks[currentRow][currentColumn].setMineIcon();
+							gameLose();
 						}
 						
 						if(blocks[currentRow][currentColumn].isCovered())
@@ -326,6 +327,8 @@ public void gameWin()
 	
 	smiley.setBackgroundResource(R.drawable.smiech);
 	
+	activateButtons(false);
+	
 	showDialogBox("Gratulacje, wygra³eœ!",czas);
 	
 }
@@ -334,7 +337,46 @@ public void gameWin()
  */
 public void gameLose()
 {
+	stopTimer();
+	isGameOver = true;
 	
+	smiley.setBackgroundResource(R.drawable.przestraszenie);
+	
+	activateButtons(false);
+	
+	
+	showDialogBox("Niestety, przegra³eœ!", czas);
+	
+}
+/** funkcja w³¹czaj¹ca i wy³¹czaj¹ca przyciski
+ * 
+ */
+public void activateButtons(boolean b)
+{
+	if(!b)
+	{
+		// wy³¹czanie przycisków
+		for(int i = 0; i < number_of_rows + 1; i++)
+		{
+			for(int j = 0; j < number_of_columns + 1; j++)
+			{
+				blocks[i][j].setClickable(false);
+				blocks[i][j].setLongClickable(false);
+			}
+		}
+	}
+	else
+	{
+		// w³¹czenie przycisków
+		for(int i = 0; i < number_of_rows + 1; i++)
+		{
+			for(int j = 0; j < number_of_columns + 1; j++)
+			{
+				blocks[i][j].setClickable(true);
+				blocks[i][j].setLongClickable(true);
+			}
+		}
+	}
 }
 /** funkcja koñcz¹ca obecn¹ grê
  * 
@@ -359,8 +401,8 @@ public void endGame()
 public void showDialogBox(String message, int seconds)
 {
 	Context context = getApplicationContext();
-	CharSequence text = message + "\nCzas gry: " + String.valueOf(seconds);
-	int duration = Toast.LENGTH_SHORT;
+	CharSequence text = message + "\nCzas gry: " + String.valueOf(seconds) + " sekund";
+	int duration = Toast.LENGTH_LONG;
 	
 	Toast toast = Toast.makeText(context, text, duration);
 	toast.setGravity(Gravity.CENTER, 0, 0);
