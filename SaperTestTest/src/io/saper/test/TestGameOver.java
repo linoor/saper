@@ -35,11 +35,14 @@ public class TestGameOver extends ActivityInstrumentationTestCase2<MainActivity>
 			blocks[i] = (Block) solo.getButton(rand.nextInt(9*9));
 			solo.clickOnView(blocks[i]);
 		}
-		
-		public void testGameOver()
-		{
-			Assert.assertEquals(true, getActivity().)
-		}
 	}
+	
+	public void testGameOver()
+	{
+		Assert.assertEquals(true, getActivity().isGameOver());
+	}
+	
+	
+	
 
 }

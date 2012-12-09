@@ -26,9 +26,9 @@ private int number_of_rows = 9;
 private int number_of_columns = 9;
 private int wielkosc_pola = 15;
 private final int odstep = 3;
-private int minesToFind = 10; // pozosta³e do znalezienia miny
 /** maksymalna liczba min */
 private int minesTotal = 10;
+private int minesToFind; // pozosta³e do znalezienia miny
 
 private Handler timer = new Handler();
 private int czas = 0;
@@ -57,9 +57,8 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
         /*ustawianie pola minowego*/
         pole_minowe = (TableLayout) findViewById(R.id.pole_minowe);
         
-        // tworzenie pola minowego
-        createMineField();
-        showMineField();
+        // rozpoczecie gry
+        startNewGame();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -72,6 +71,19 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
     public boolean isGameOver()
     {
     	return isGameOver;
+    }
+    /** funkcja rozpoczynaj¹ca grê
+     * 
+     */
+    public void startNewGame()
+    {
+    	// tworzenie pola minowego
+        createMineField();
+        showMineField();
+        
+        minesToFind = minesTotal;
+        isGameOver = false;
+        czas = 0;
     }
     /**tworzy tablelayout i pokazuje pole minowe*/
     private void showMineField()
@@ -296,8 +308,15 @@ public boolean checkWin()
 public void endGame()
 {
 	isGameOver = true;
+	stopTimer();
+	zegar.setText("000");
+	minecount.setText("000");
+	isTimerstarted = false;
+	areMinesSet = false;
+	isGameOver = false;
+	minesToFind = 0;
 	
-	
+	pole_minowe.removeAllViews();
 }
 
 }
