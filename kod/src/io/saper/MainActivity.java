@@ -6,16 +6,21 @@ import java.util.Random;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Typeface;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 private TextView zegar, minecount;
@@ -153,8 +158,13 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
 							blocks[currentRow][currentColumn].uncover();
 						}
 					}
+					
+					// sprawdzenie czy gra zosta³a zakoñczona
+					if(checkWin())
+					{
+						gameWin();
+					}
 				}
-				
 			});
 			
 			
@@ -290,17 +300,41 @@ public void updateMineCount()
  */
 public boolean checkWin()
 {
-	for(int i = 0; i < number_of_rows + 1; i++)
+	for(int i = 1; i < number_of_rows + 1; i++)
 	{
-		for(int j = 0; j < number_of_columns + 1; j++)
+		for(int j = 1; j < number_of_columns + 1; j++)
 		{
-			if(blocks[i][j].isMined() && !blocks[i][j].isCovered())
+			if(blocks[i][j].isFlagged())
+			{
+				continue;
+			}
+			else if(!blocks[i][j].isMined() && blocks[i][j].isCovered())
 			{
 				return false;
 			}
 		}
 	}
 	return true;
+}
+/** funkcja wywo³ywana przy wygraniu gry
+ * 
+ */
+public void gameWin()
+{
+	stopTimer();
+	isGameOver = true;
+	
+	smiley.setBackgroundResource(R.drawable.smiech);
+	
+	showDialogBox("Gratulacje, wygra³eœ!",czas);
+	
+}
+/** funkcja wywo³ywana przy przegraniu gry
+ * 
+ */
+public void gameLose()
+{
+	
 }
 /** funkcja koñcz¹ca obecn¹ grê
  * 
@@ -317,6 +351,27 @@ public void endGame()
 	minesToFind = 0;
 	
 	pole_minowe.removeAllViews();
+}
+
+/** funkcja pokazuj¹ca okienko w przypadku wygranej
+ * @version 0.0
+ */
+public void showDialogBox(String message, int seconds)
+{
+	Context context = getApplicationContext();
+	CharSequence text = message + "\nCzas gry: " + String.valueOf(seconds);
+	int duration = Toast.LENGTH_SHORT;
+	
+	Toast toast = Toast.makeText(context, text, duration);
+	toast.setGravity(Gravity.CENTER, 0, 0);
+	
+	LinearLayout l = (LinearLayout) toast.getView();
+	ImageView i = new ImageView(getApplicationContext());
+	i.setBackgroundResource(R.drawable.smiech);
+	l.addView(i,0);
+	
+	
+	toast.show();
 }
 
 }
