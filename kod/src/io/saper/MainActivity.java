@@ -258,4 +258,25 @@ public void updateMineCount()
 	minecount.setText(String.format("%03d", minesToFind));
 }
 
+
+/** funkcja sprawdzaj¹ca czy gracz wygra³ grê
+ * @version 1.0
+ * @return true jeœli wszystkie pola, które nie by³y zaminowane zosta³y odkryte,
+ * false jeœli nie wszystkie zosta³y odkryte
+ */
+public boolean checkWin()
+{
+	for(int i = 0; i < number_of_rows + 1; i++)
+	{
+		for(int j = 0; j < number_of_columns + 1; j++)
+		{
+			if(blocks[i][j].isMined() && !blocks[i][j].isCovered())
+			{
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
 }

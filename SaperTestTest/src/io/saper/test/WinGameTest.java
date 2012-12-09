@@ -35,7 +35,7 @@ public class WinGameTest extends ActivityInstrumentationTestCase2<MainActivity>
 				solo.clickOnView(block);
 			}
 		}
-		Assert.assertTrue(checkWin());
+		Assert.assertTrue(getActivity().checkWin());
 	}
 
 }
