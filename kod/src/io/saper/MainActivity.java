@@ -347,7 +347,7 @@ public void gameWin()
 	
 	activateButtons(false);
 	
-	showDialogBox("Gratulacje, wygra³eœ!",czas);
+	showDialogBox("Gratulacje, wygra³eœ!",czas,true);
 	
 }
 /** funkcja wywo³ywana przy przegraniu gry
@@ -358,12 +358,12 @@ public void gameLose()
 	stopTimer();
 	isGameOver = true;
 	
-	smiley.setBackgroundResource(R.drawable.przestraszenie);
+	smiley.setBackgroundResource(R.drawable.placz);
 	
 	activateButtons(false);
 	
 	
-	showDialogBox("Niestety, przegra³eœ!", czas);
+	showDialogBox("Niestety, przegra³eœ!", czas, false);
 	
 }
 /** funkcja w³¹czaj¹ca i wy³¹czaj¹ca przyciski
@@ -416,7 +416,7 @@ public void endGame()
 /** funkcja pokazuj¹ca okienko w przypadku wygranej
  * @version 0.0
  */
-public void showDialogBox(String message, int seconds)
+public void showDialogBox(String message, int seconds, boolean win)
 {
 	Context context = getApplicationContext();
 	CharSequence text = message + "\nCzas gry: " + String.valueOf(seconds) + " sekund";
@@ -427,7 +427,14 @@ public void showDialogBox(String message, int seconds)
 	
 	LinearLayout l = (LinearLayout) toast.getView();
 	ImageView i = new ImageView(getApplicationContext());
-	i.setBackgroundResource(R.drawable.smiech);
+	if(win)
+	{
+		i.setBackgroundResource(R.drawable.smiech);
+	}
+	else
+	{
+		i.setBackgroundResource(R.drawable.placz);
+	}
 	l.addView(i,0);
 	
 	
