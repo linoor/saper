@@ -6,14 +6,19 @@ import java.util.Random;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
+import android.support.v4.app.DialogFragment;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,13 +39,15 @@ private final int odstep = 3;
 /** maksymalna liczba min */
 private int minesTotal = 10;
 private int minesToFind; // pozosta³e do znalezienia miny
+final Context context = this;//uzywane przy okienkach
 
 private Handler timer = new Handler();
 private int czas = 0;
 
 private boolean isTimerstarted = false; // jeœli true, to znaczy, ¿e zegar rozpocz¹³ odliczanie
 private boolean areMinesSet = false; // jeœli true, to znaczy, ¿e miny zosta³y ustawione
-private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
+private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczonaSe
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +67,48 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
 			public void onClick(View v)
 			{
 				endGame();
-				startNewGame();
+				
+				//tworzymy okienko dialogowe!!!
+				final Dialog dialog = new Dialog(context);
+				dialog.setContentView(R.layout.custom);
+				dialog.setTitle("Wybor planszy");
+	 
+				// set the custom dialog components - text, image and button
+				TextView text = (TextView) dialog.findViewById(R.id.text);
+				text.setText("Wybierz jedna z mozliwych opcji");
+				ImageView image = (ImageView) dialog.findViewById(R.id.image);
+				image.setImageResource(R.drawable.ic_launcher);
+	 
+				Button dialogButton1 = (Button) dialog.findViewById(R.id.planszaMin);
+				Button dialogButton2 = (Button) dialog.findViewById(R.id.planszaMed);
+				Button dialogButton3 = (Button) dialog.findViewById(R.id.planszaMax);
+				// if button is clicked, close the custom dialog
+				dialogButton1.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						ustaw(9,9,10);
+						startNewGame();
+						dialog.dismiss();
+					}
+				});
+				dialogButton2.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						ustaw(16,16,40);
+						startNewGame();
+						dialog.dismiss();
+					}
+				});
+				dialogButton3.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						ustaw(16,30,99);
+						startNewGame();
+						dialog.dismiss();
+					}
+				});
+	 
+				dialog.show();
 			}
         	
         });
@@ -92,14 +140,14 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
      * 
      */
     public void startNewGame()
-    {
-    	// tworzenie pola minowego
-        createMineField();
-        showMineField();
-        
+    {        
         minesToFind = minesTotal;
         //poprawne wyswietlanie liczby min
         minecount.setText(String.format("%03d", minesTotal));
+     // tworzenie pola minowego
+        //showDialogBox("Rozmiar planszy:"+number_of_rows+" "+number_of_columns, czas, false);
+        createMineField();
+        showMineField();
         isGameOver = false;
         czas = 0;
     }
@@ -108,19 +156,36 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
     {
     	for(int wiersz = 1; wiersz < number_of_rows + 1; wiersz++)
     	{
+    		//dynamiczny rozmiar pola
+    		int rozmiarPola = wielkosc_pola;
+    		int odstepPola = odstep;
+    		if(number_of_rows==16)
+    		{
+    			rozmiarPola=10;
+    			odstepPola=2;
+    		}
+    		else if(number_of_rows==30)
+    		{
+    			rozmiarPola=6;
+    			odstepPola=1;
+    		}
     		TableRow table = new TableRow(this);
-    		table.setLayoutParams(new TableRow.LayoutParams((wielkosc_pola + 2 * odstep) * number_of_columns, wielkosc_pola + 2 * odstep));
+    		table.setLayoutParams(new TableRow.LayoutParams(
+    				(rozmiarPola + 2 * odstepPola) * number_of_columns, 
+    				rozmiarPola + 2 * odstepPola));
     		
     		for(int kolumna = 1; kolumna < number_of_columns + 1; kolumna++)
     		{
     			blocks[wiersz][kolumna].setLayoutParams(new TableRow.LayoutParams(  
-    					wielkosc_pola + 2 * odstep,  
-    					wielkosc_pola + 2 * odstep));
-    			blocks[wiersz][kolumna].setPadding(odstep, odstep, odstep, odstep);
+    					rozmiarPola + 2 * odstepPola,  
+    					rozmiarPola + 2 * odstepPola));
+    			blocks[wiersz][kolumna].setPadding(
+    					odstepPola, odstepPola, odstepPola, odstepPola);
     			table.addView(blocks[wiersz][kolumna]);
     		}
     		pole_minowe.addView(table,new TableLayout.LayoutParams(  
-					(wielkosc_pola + 2 * odstep) * number_of_columns, wielkosc_pola + 2 * odstep));;
+					(rozmiarPola + 2 * odstepPola) * number_of_columns, 
+					rozmiarPola + 2 * odstepPola));;
     	}
     }
     /**tworzy pole minowe*/
@@ -128,7 +193,7 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
 {
  // po 2 dodatkowe wiersze i kolumny (potrzebne do obliczania pobliskich min)
 	blocks = new Block[number_of_rows + 2][number_of_columns + 2];
-	
+	//showDialogBox("Rozmiar planszy:"+number_of_rows+" "+number_of_columns, czas, false);
 	//inicjalizowanie pól z minami
 	for(int wiersz = 0; wiersz < number_of_rows + 2; wiersz++)
 	{
@@ -267,6 +332,8 @@ public void setMines(int blockRow, int BlockColumn)
 			continue;
 		}
 		// sprawdzamy czy na miejscu juz jest jakas mina
+		//angela: po wyborze innego rozmiatu tutaj rzuca wyjatkiem!
+		//przekroczenie zakresu tablicy
 		if(blocks[randomRow][randomColumn].isMined())
 		{
 			i--;
@@ -443,6 +510,17 @@ public void showDialogBox(String message, int seconds, boolean win)
 	
 	
 	toast.show();
+}
+/**funkcja ustalajaca rozmiar planszy i liczbe min
+ * @param rows liczba rzedow planszy
+ * @param columns liczba kolumn planszy
+ * @param mines liczba min na planszy
+ */
+public void ustaw(int columns, int rows, int mines)
+{
+	this.number_of_rows = rows;
+	this.number_of_columns = columns;
+	this.minesTotal = mines;
 }
 
 }

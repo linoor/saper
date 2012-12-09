@@ -4,13 +4,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/background"
-    android:stretchColumns="0,2" >
-
-    <TableRow
+    android:stretchColumns="0,2">
+    
+  	<TableRow
         android:id="@+id/tableRow1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
-
+
         <TextView
             android:id="@+id/timer"
             android:layout_width="wrap_content"
@@ -21,7 +21,7 @@
             android:textColor="@color/kolor_licznikow"
             android:textSize="7mm"
             android:typeface="normal" />
-
+
         <ImageButton
             android:id="@+id/imageButton1"
             android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
             android:layout_gravity="center"
             android:background="@null"
             android:src="@drawable/usmiech" />
-
+
         <TextView
             android:id="@+id/licznik_min"
             android:layout_width="wrap_content"
@@ -42,7 +42,7 @@
             android:textSize="7mm" />
 
     </TableRow>
-
+    
     <TableRow
         android:id="@+id/tableRow2"
         android:layout_width="wrap_content"
@@ -50,12 +50,12 @@
         android:minHeight="25dp" >
 
     </TableRow>
-
+    
     <TableRow
         android:id="@+id/tableRow3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
-
+        
         <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
       android:id="@+id/pole_minowe"
       android:layout_width="260dp"
