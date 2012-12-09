@@ -141,7 +141,7 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
 					
 					if(!areMinesSet)
 					{
-						setMines();
+						setMines(currentRow,currentColumn);
 						areMinesSet = true;
 					}
 					
@@ -233,7 +233,7 @@ private Runnable updateTime = new Runnable()
     }
 };
 /** metoda ustawiaj¹ca miny na losowe miejsca */
-public void setMines()
+public void setMines(int blockRow, int BlockColumn)
 {
 	Random rand = new Random();
 	
@@ -247,10 +247,17 @@ public void setMines()
 		randomRow = rand.nextInt(number_of_rows) + 1;
 		randomColumn = rand.nextInt(number_of_columns) + 1;
 		
+		// sprawdzamy czy to blok klikniety jako pierwszy ( jesli tak, to nie stawiamy tam miny)
+		if(randomRow == blockRow && randomColumn == BlockColumn)
+		{
+			i--;
+			continue;
+		}
 		// sprawdzamy czy na miejscu juz jest jakas mina
 		if(blocks[randomRow][randomColumn].isMined())
 		{
 			i--;
+			continue;
 		}
 		blocks[randomRow][randomColumn].setMine();
 	}
