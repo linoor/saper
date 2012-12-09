@@ -66,6 +66,13 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczona
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
     }
+    /** Funkcja zwracaj¹ca status gry
+     * @return true jeœli gra zosta³a zakoñczona, false jeœli nie zosta³a zakoñczona
+     */
+    public boolean isGameOver()
+    {
+    	return isGameOver;
+    }
     /**tworzy tablelayout i pokazuje pole minowe*/
     private void showMineField()
     {
@@ -289,6 +296,7 @@ public boolean checkWin()
 public void endGame()
 {
 	isGameOver = true;
+	
 	
 }
 
