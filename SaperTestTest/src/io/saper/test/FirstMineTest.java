@@ -6,7 +6,9 @@ import com.jayway.android.robotium.solo.Solo;
 
 import io.saper.Block;
 import io.saper.MainActivity;
+import io.saper.R;
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.Button;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
@@ -33,9 +35,10 @@ public class FirstMineTest extends ActivityInstrumentationTestCase2<MainActivity
 		{
 			int k = rand.nextInt(9*9);
 			solo.clickOnButton(k);
-			solo.clickOnImage(0);
 			Block block = (Block) solo.getButton(k);
 			Assert.assertEquals(false, block.isMined());
+			solo.clickOnImage(0);
+			solo.clickOnButton(0);
 		}
 	}
 
