@@ -523,4 +523,14 @@ public void ustaw(int columns, int rows, int mines)
 	this.minesTotal = mines;
 }
 
+public int rzedy()
+{
+	return number_of_rows;
+}
+
+public int kolumny()
+{
+	return number_of_columns;
+}
+
 }
