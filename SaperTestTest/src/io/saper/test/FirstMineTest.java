@@ -31,14 +31,17 @@ public class FirstMineTest extends ActivityInstrumentationTestCase2<MainActivity
 	public void testFirstMine()
 	{
 		Random rand = new Random();
-		for(int i = 0; i < 100; i++)
+		for(int i = 0; i < 10; i++)
 		{
-			int k = rand.nextInt(9*9);
+			int rzedy=getActivity().rzedy();
+			int kolumny=getActivity().kolumny();
+			int k = rand.nextInt(rzedy*kolumny);
 			solo.clickOnButton(k);
 			Block block = (Block) solo.getButton(k);
 			Assert.assertEquals(false, block.isMined());
 			solo.clickOnImage(0);
-			solo.clickOnButton(0);
+			int butt = rand.nextInt(3);
+			solo.clickOnButton(butt);
 		}
 	}
 
