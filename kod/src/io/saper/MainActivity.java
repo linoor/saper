@@ -301,6 +301,7 @@ public void startTimer()
 public void stopTimer()
 {
 	timer.removeCallbacks(updateTime);
+	setTimerstarted(false);
 }
 /** Zadanie stworzone na potrzeby zegara ( klasa anonimowa )*/
 private Runnable updateTime = new Runnable()
