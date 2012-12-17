@@ -56,7 +56,7 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczonaSe
         /*tworzenie napisów(liczników)*/
         zegar = (TextView) findViewById(R.id.timer);
         minecount = (TextView) findViewById(R.id.licznik_min);
-        minecount.setText(String.format("%03d", minesTotal));
+        minecount.setText(String.format("%03d", getMinesTotal()));
         
         /*tworzenie referencji do przycisku*/
         smiley = (ImageButton) findViewById(R.id.imageButton1);
@@ -67,48 +67,9 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczonaSe
 			public void onClick(View v)
 			{
 				endGame();
-				
 				//tworzymy okienko dialogowe!!!
-				final Dialog dialog = new Dialog(context);
-				dialog.setContentView(R.layout.custom);
-				dialog.setTitle("Wybor planszy");
-	 
-				// set the custom dialog components - text, image and button
-				TextView text = (TextView) dialog.findViewById(R.id.text);
-				text.setText("Wybierz jedna z mozliwych opcji");
-				ImageView image = (ImageView) dialog.findViewById(R.id.image);
-				image.setImageResource(R.drawable.ic_launcher);
-	 
-				Button dialogButton1 = (Button) dialog.findViewById(R.id.planszaMin);
-				Button dialogButton2 = (Button) dialog.findViewById(R.id.planszaMed);
-				Button dialogButton3 = (Button) dialog.findViewById(R.id.planszaMax);
-				// if button is clicked, close the custom dialog
-				dialogButton1.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						ustaw(9,9,10);
-						startNewGame();
-						dialog.dismiss();
-					}
-				});
-				dialogButton2.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						ustaw(16,16,40);
-						startNewGame();
-						dialog.dismiss();
-					}
-				});
-				dialogButton3.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						ustaw(16,30,99);
-						startNewGame();
-						dialog.dismiss();
-					}
-				});
-	 
-				dialog.show();
+				okienko();
+
 			}
         	
         });
@@ -141,15 +102,15 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczonaSe
      */
     public void startNewGame()
     {        
-        minesToFind = minesTotal;
+        setMinesToFind(getMinesTotal());
         //poprawne wyswietlanie liczby min
-        minecount.setText(String.format("%03d", minesTotal));
+        minecount.setText(String.format("%03d", getMinesTotal()));
      // tworzenie pola minowego
         //showDialogBox("Rozmiar planszy:"+number_of_rows+" "+number_of_columns, czas, false);
         createMineField();
         showMineField();
         isGameOver = false;
-        czas = 0;
+        setCzas(0);
     }
     /**tworzy tablelayout i pokazuje pole minowe*/
     private void showMineField()
@@ -176,12 +137,12 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczonaSe
     		
     		for(int kolumna = 1; kolumna < number_of_columns + 1; kolumna++)
     		{
-    			blocks[wiersz][kolumna].setLayoutParams(new TableRow.LayoutParams(  
+    			getBlocks()[wiersz][kolumna].setLayoutParams(new TableRow.LayoutParams(  
     					rozmiarPola + 2 * odstepPola,  
     					rozmiarPola + 2 * odstepPola));
-    			blocks[wiersz][kolumna].setPadding(
+    			getBlocks()[wiersz][kolumna].setPadding(
     					odstepPola, odstepPola, odstepPola, odstepPola);
-    			table.addView(blocks[wiersz][kolumna]);
+    			table.addView(getBlocks()[wiersz][kolumna]);
     		}
     		pole_minowe.addView(table,new TableLayout.LayoutParams(  
 					(rozmiarPola + 2 * odstepPola) * number_of_columns, 
@@ -192,49 +153,49 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczonaSe
     private void createMineField()
 {
  // po 2 dodatkowe wiersze i kolumny (potrzebne do obliczania pobliskich min)
-	blocks = new Block[number_of_rows + 2][number_of_columns + 2];
+	setBlocks(new Block[number_of_rows + 2][number_of_columns + 2]);
 	//showDialogBox("Rozmiar planszy:"+number_of_rows+" "+number_of_columns, czas, false);
 	//inicjalizowanie pól z minami
 	for(int wiersz = 0; wiersz < number_of_rows + 2; wiersz++)
 	{
 		for(int kolumna = 0; kolumna < number_of_columns + 2; kolumna++)
 		{
-			blocks[wiersz][kolumna] = new Block(this);
+			getBlocks()[wiersz][kolumna] = new Block(this);
 			
 			// ustawiamy na final, ¿eby przekazaæ do klas anonimowych listenerów
 			final int currentRow = wiersz;
 			final int currentColumn = kolumna;
 			
 			// tutaj mo¿na zaimplementowaæ co siê dzieje po krótkim klikniêciu
-			blocks[wiersz][kolumna].setOnClickListener(new OnClickListener()
+			getBlocks()[wiersz][kolumna].setOnClickListener(new OnClickListener()
 			{
 				public void onClick(View v)
 				{
 					// jeœli zegar nie rozpocz¹³ odliczania, rozpocznij odliczanie
-					if(!isTimerstarted)
+					if(!isTimerstarted())
 					{
 						startTimer();
-						isTimerstarted = true;
+						setTimerstarted(true);
 					}
 					
-					if(!areMinesSet)
+					if(!isAreMinesSet())
 					{
 						setMines(currentRow,currentColumn);
-						areMinesSet = true;
+						setAreMinesSet(true);
 					}
 					
 					// jeœli pole nie jest zaznaczone flag¹
-					if(!blocks[currentRow][currentColumn].isFlagged())
+					if(!getBlocks()[currentRow][currentColumn].isFlagged())
 					{
-						if(blocks[currentRow][currentColumn].isMined())
+						if(getBlocks()[currentRow][currentColumn].isMined())
 						{
-							blocks[currentRow][currentColumn].setMineIcon();
+							getBlocks()[currentRow][currentColumn].setMineIcon();
 							gameLose();
 						}
 						
-						if(blocks[currentRow][currentColumn].isCovered())
+						if(getBlocks()[currentRow][currentColumn].isCovered())
 						{
-							blocks[currentRow][currentColumn].uncover();
+							getBlocks()[currentRow][currentColumn].uncover();
 						}
 					}
 					
@@ -248,31 +209,31 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczonaSe
 			
 			
 			// tutaj mo¿na zaimplementowaæ co siê dzieje po d³ugim klikniêciu
-			blocks[wiersz][kolumna].setOnLongClickListener(new OnLongClickListener()
+			getBlocks()[wiersz][kolumna].setOnLongClickListener(new OnLongClickListener()
 				{
 					
 					public boolean onLongClick(View v)
 					{
-						if(!blocks[currentRow][currentColumn].isFlagged() && minesToFind >= 1)
+						if(!getBlocks()[currentRow][currentColumn].isFlagged() && getMinesToFind() >= 1)
 						{
 							// zmiejszamy liczbê min do znalezienia
-							minesToFind--;
+							setMinesToFind(getMinesToFind() - 1);
 							// ustawiamy ikonkê flagi
-							blocks[currentRow][currentColumn].setFlagIcon(true);
+							getBlocks()[currentRow][currentColumn].setFlagIcon(true);
 							// ustawiamy znacznik
-							blocks[currentRow][currentColumn].setFlagged(true);
+							getBlocks()[currentRow][currentColumn].setFlagged(true);
 							// update minecount
 							updateMineCount();
 							
 						}
-						else if(blocks[currentRow][currentColumn].isFlagged())
+						else if(getBlocks()[currentRow][currentColumn].isFlagged())
 						{
 							// zwiêkszamy liczbê min do znalezienia
-							minesToFind++;
+							setMinesToFind(getMinesToFind() + 1);
 							// zmieniamy ikonke
-							blocks[currentRow][currentColumn].setFlagIcon(false);
+							getBlocks()[currentRow][currentColumn].setFlagIcon(false);
 							// ustawiamy znacznik
-							blocks[currentRow][currentColumn].setFlagged(false);
+							getBlocks()[currentRow][currentColumn].setFlagged(false);
 							// update mineCount
 							updateMineCount();
 						}
@@ -282,10 +243,55 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczonaSe
 		}
 	}
 }
+/**
+ * tworzy okienko, ktore pojawia sie po kliknieciu buzki
+ */
+public void okienko()
+{
+	final Dialog dialog = new Dialog(context);
+	dialog.setContentView(R.layout.custom);
+	dialog.setTitle("Wybor planszy");
+
+	// set the custom dialog components - text, image and button
+	TextView text = (TextView) dialog.findViewById(R.id.text);
+	text.setText("Wybierz jedna z mozliwych opcji");
+	ImageView image = (ImageView) dialog.findViewById(R.id.image);
+	image.setImageResource(R.drawable.ic_launcher);
+
+	Button dialogButton1 = (Button) dialog.findViewById(R.id.planszaMin);
+	Button dialogButton2 = (Button) dialog.findViewById(R.id.planszaMed);
+	Button dialogButton3 = (Button) dialog.findViewById(R.id.planszaMax);
+	// if button is clicked, close the custom dialog
+	dialogButton1.setOnClickListener(new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			ustaw(9,9,10);
+			startNewGame();
+			dialog.dismiss();
+		}
+	});
+	dialogButton2.setOnClickListener(new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			ustaw(16,16,40);
+			startNewGame();
+			dialog.dismiss();
+		}
+	});
+	dialogButton3.setOnClickListener(new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			ustaw(16,30,99);
+			startNewGame();
+			dialog.dismiss();
+		}
+	});
+	dialog.show();
+}
 /** rozpoczyna odliczanie czasu */
 public void startTimer()
 {
-	if(czas == 0)
+	if(getCzas() == 0)
 	{
 		timer.removeCallbacks(updateTime);
 		timer.postDelayed(updateTime, 500);
@@ -302,8 +308,8 @@ private Runnable updateTime = new Runnable()
    public void run()
     {
     		long czasRozpoczeciaZadania = System.currentTimeMillis();
-    		czas++; // odliczamy jedna sekundê
-    		zegar.setText(String.format("%03d", czas)); // update zegara
+    		setCzas(getCzas() + 1); // odliczamy jedna sekundê
+    		zegar.setText(String.format("%03d", getCzas())); // update zegara
     		
     		// ustaw zadanie na czas rozpoczecia zadania, a nastêpnie opóŸnij go o sekundê
     		timer.postAtTime(this, czasRozpoczeciaZadania);
@@ -319,7 +325,7 @@ public void setMines(int blockRow, int BlockColumn)
 	
 	
 	// losujemy miejsce dla min tyle razy ile ma byæ min
-	for(int i = 0; i < minesTotal; i++)
+	for(int i = 0; i < getMinesTotal(); i++)
 	{
 		
 		randomRow = rand.nextInt(number_of_rows) + 1;
@@ -334,12 +340,12 @@ public void setMines(int blockRow, int BlockColumn)
 		// sprawdzamy czy na miejscu juz jest jakas mina
 		//angela: po wyborze innego rozmiatu tutaj rzuca wyjatkiem!
 		//przekroczenie zakresu tablicy
-		if(blocks[randomRow][randomColumn].isMined())
+		if(getBlocks()[randomRow][randomColumn].isMined())
 		{
 			i--;
 			continue;
 		}
-		blocks[randomRow][randomColumn].setMine();
+		getBlocks()[randomRow][randomColumn].setMine();
 	}
 	
 	// obliczanie ilosci min dookola pól
@@ -360,7 +366,7 @@ public void setMines(int blockRow, int BlockColumn)
 				{
 					for(int poprzedni_k = -1; poprzedni_k < 2; poprzedni_k++)
 					{
-						if(blocks[row + poprzedni_r][column + poprzedni_k].isMined())
+						if(getBlocks()[row + poprzedni_r][column + poprzedni_k].isMined())
 						{
 							nearbyMines++;
 						}
@@ -368,7 +374,7 @@ public void setMines(int blockRow, int BlockColumn)
 				}
 				
 				// ustaw znalezion¹ liczbê min do pamiêci pola
-				blocks[row][column].setMinesSurrounding(nearbyMines);
+				getBlocks()[row][column].setMinesSurrounding(nearbyMines);
 			}
 		}
 	}
@@ -377,7 +383,7 @@ public void setMines(int blockRow, int BlockColumn)
 /** funkcja ustawiaj¹ca liczbê min */
 public void updateMineCount()
 {
-	minecount.setText(String.format("%03d", minesToFind));
+	minecount.setText(String.format("%03d", getMinesToFind()));
 }
 
 
@@ -392,11 +398,11 @@ public boolean checkWin()
 	{
 		for(int j = 1; j < number_of_columns + 1; j++)
 		{
-			if(blocks[i][j].isFlagged())
+			if(getBlocks()[i][j].isFlagged())
 			{
 				continue;
 			}
-			else if(!blocks[i][j].isMined() && blocks[i][j].isCovered())
+			else if(!getBlocks()[i][j].isMined() && getBlocks()[i][j].isCovered())
 			{
 				return false;
 			}
@@ -418,7 +424,7 @@ public void gameWin()
 	//niech wyzeruje licznik min!
 	minecount.setText("000");
 	
-	showDialogBox("Gratulacje, wygra³eœ!",czas,true);
+	showDialogBox("Gratulacje, wygra³eœ!",getCzas(),true);
 	
 }
 /** funkcja wywo³ywana przy przegraniu gry
@@ -435,7 +441,7 @@ public void gameLose()
 	//dodalam, bo tutaj chcemy, by wyzerowalo licznik 
 	minecount.setText("000");
 	
-	showDialogBox("Niestety, przegra³eœ!", czas, false);
+	showDialogBox("Niestety, przegra³eœ!", getCzas(), false);
 	
 }
 /** funkcja w³¹czaj¹ca i wy³¹czaj¹ca przyciski
@@ -450,8 +456,8 @@ public void activateButtons(boolean b)
 		{
 			for(int j = 0; j < number_of_columns + 1; j++)
 			{
-				blocks[i][j].setClickable(false);
-				blocks[i][j].setLongClickable(false);
+				getBlocks()[i][j].setClickable(false);
+				getBlocks()[i][j].setLongClickable(false);
 			}
 		}
 	}
@@ -462,8 +468,8 @@ public void activateButtons(boolean b)
 		{
 			for(int j = 0; j < number_of_columns + 1; j++)
 			{
-				blocks[i][j].setClickable(true);
-				blocks[i][j].setLongClickable(true);
+				getBlocks()[i][j].setClickable(true);
+				getBlocks()[i][j].setLongClickable(true);
 			}
 		}
 	}
@@ -476,10 +482,10 @@ public void endGame()
 	isGameOver = true;
 	stopTimer();
 	zegar.setText("000");
-	isTimerstarted = false;
-	areMinesSet = false;
+	setTimerstarted(false);
+	setAreMinesSet(false);
 	isGameOver = false;
-	minesToFind = 0;
+	setMinesToFind(0);
 	
 	pole_minowe.removeAllViews();
 }
@@ -520,7 +526,7 @@ public void ustaw(int columns, int rows, int mines)
 {
 	this.number_of_rows = rows;
 	this.number_of_columns = columns;
-	this.minesTotal = mines;
+	this.setMinesTotal(mines);
 }
 
 public int rzedy()
@@ -531,6 +537,42 @@ public int rzedy()
 public int kolumny()
 {
 	return number_of_columns;
+}
+public int getCzas() {
+	return czas;
+}
+public void setCzas(int czas) {
+	this.czas = czas;
+}
+public int getMinesToFind() {
+	return minesToFind;
+}
+public void setMinesToFind(int minesToFind) {
+	this.minesToFind = minesToFind;
+}
+public int getMinesTotal() {
+	return minesTotal;
+}
+public void setMinesTotal(int minesTotal) {
+	this.minesTotal = minesTotal;
+}
+public boolean isTimerstarted() {
+	return isTimerstarted;
+}
+public void setTimerstarted(boolean isTimerstarted) {
+	this.isTimerstarted = isTimerstarted;
+}
+public boolean isAreMinesSet() {
+	return areMinesSet;
+}
+public void setAreMinesSet(boolean areMinesSet) {
+	this.areMinesSet = areMinesSet;
+}
+public Block[][] getBlocks() {
+	return blocks;
+}
+public void setBlocks(Block blocks[][]) {
+	this.blocks = blocks;
 }
 
 }
