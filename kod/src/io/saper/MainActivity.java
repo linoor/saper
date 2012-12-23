@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.SlidingDrawer;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -194,10 +195,9 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczonaSe
 							gameLose();
 						}
 						
-						if(getBlocks()[currentRow][currentColumn].isCovered())
+						else if(getBlocks()[currentRow][currentColumn].isCovered())
 						{
 							getBlocks()[currentRow][currentColumn].uncover();
-							getBlocks()[currentRow][currentColumn].ustawLiczby(currentRow, currentColumn);
 						}
 					}
 					
@@ -216,7 +216,8 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczonaSe
 					
 					public boolean onLongClick(View v)
 					{
-						if(!getBlocks()[currentRow][currentColumn].isFlagged() && getMinesToFind() >= 1)
+						if(!getBlocks()[currentRow][currentColumn].isFlagged() && getMinesToFind() >= 1 &&
+								getBlocks()[currentRow][currentColumn].isCovered())
 						{
 							// zmiejszamy liczbê min do znalezienia
 							setMinesToFind(getMinesToFind() - 1);
@@ -239,6 +240,13 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczonaSe
 							// update mineCount
 							updateMineCount();
 						}
+						if(minecount.getText().equals("0"))
+						{
+							if(checkWin())
+							{
+								gameWin();
+							}
+						}
 						return true;
 					}
 				});
@@ -249,6 +257,7 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczonaSe
 private void rippleEffect(int row, int column)
 {
 	Block block = blocks[row][column];
+	Random rand = new Random(36);
 	if(block.isFlagged() || block.isMined())
 	{
 		return;
@@ -265,13 +274,25 @@ private void rippleEffect(int row, int column)
 	{
 		for(int j = 0; j < 3; j++)
 		{
-			int wiersz = row + i - 1;
-			int kolumna = column + j - 1;
+			final int wiersz = row + i - 1;
+			final int kolumna = column + j - 1;
 			if(blocks[wiersz][kolumna].isCovered() &&
 					wiersz < number_of_rows + 1 && kolumna < number_of_columns + 1 &&
 					wiersz > 0 && kolumna > 0)
 			{
-				rippleEffect(wiersz, kolumna);
+				
+				// t³umienie
+				Thread t = new Thread(new Runnable()
+				{
+
+					public void run()
+					{
+						rippleEffect(wiersz, kolumna);
+						
+					}
+					
+				});
+				t.run();
 			}
 		}
 	}

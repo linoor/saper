@@ -38,14 +38,20 @@ public class Block extends Button
 		}
 		isCovered = false;
 		this.setBackgroundResource(R.drawable.red);
+		ustawLiczby();
 	}
 	/**funkcja ustawiajaca numerki na polach
 	 * 
 	 */
-	public void ustawLiczby(int row, int column)
+	public void ustawLiczby()
 	{
+		
 		final int liczbaMin = getMinesSurrounding();
 		setText(String.valueOf(liczbaMin));
+		if(liczbaMin == 0)
+		{
+			setText("");
+		}
 		
 		switch(liczbaMin)
 		{
