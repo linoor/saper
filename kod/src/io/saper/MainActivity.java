@@ -186,6 +186,8 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczonaSe
 					// jeœli pole nie jest zaznaczone flag¹
 					if(!getBlocks()[currentRow][currentColumn].isFlagged())
 					{
+						rippleEffect(currentRow, currentColumn);
+						
 						if(getBlocks()[currentRow][currentColumn].isMined())
 						{
 							getBlocks()[currentRow][currentColumn].setMineIcon();
@@ -240,6 +242,37 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczonaSe
 						return true;
 					}
 				});
+		}
+	}
+}
+/** ripple effect */
+private void rippleEffect(int row, int column)
+{
+	Block block = blocks[row][column];
+	if(block.isFlagged() || block.isMined())
+	{
+		return;
+	}
+	
+	block.uncover();
+	
+	if(block.getMinesSurrounding() > 0)
+	{
+		return;
+	}
+	
+	for(int i = 0; i < 3; i++)
+	{
+		for(int j = 0; j < 3; j++)
+		{
+			int wiersz = row + i - 1;
+			int kolumna = column + j - 1;
+			if(blocks[wiersz][kolumna].isCovered() &&
+					wiersz < number_of_rows + 1 && kolumna < number_of_columns + 1 &&
+					wiersz > 0 && kolumna > 0)
+			{
+				rippleEffect(wiersz, kolumna);
+			}
 		}
 	}
 }
@@ -374,6 +407,11 @@ public void setMines(int blockRow, int BlockColumn)
 				
 				// ustaw znalezion¹ liczbê min do pamiêci pola
 				getBlocks()[row][column].setMinesSurrounding(nearbyMines);
+			}
+			else
+			{
+				getBlocks()[row][column].setMinesSurrounding(0);
+				getBlocks()[row][column].uncover();
 			}
 		}
 	}
