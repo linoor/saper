@@ -53,24 +53,24 @@
         android:id="@+id/tableRow3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
-
+
         <ScrollView
             android:id="@+id/scroll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:layout_span="3"
             android:scrollbars="vertical"
             android:visibility="visible" >
-
+
             <TableLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/pole_minowe"
-                android:layout_width="260dp"
-                android:layout_height="260dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:gravity="bottom"
                 android:padding="5dip"
                 android:stretchColumns="*" >
+
             </TableLayout>
         </ScrollView>
     </TableRow>
