@@ -22,7 +22,7 @@ public class Block extends Button
 		numberOfMinesSurrounding = 0;
 		
 		// ustawianie t³a pola
-		this.setBackgroundResource(R.drawable.tlo_pola);
+		this.setBackgroundResource(R.drawable.orange);
 	}
 	/** sprawdza czy pole jest odkryte */
 	public boolean isCovered()
@@ -37,7 +37,7 @@ public class Block extends Button
 			return;
 		}
 		isCovered = false;
-		this.setBackgroundResource(R.drawable.szara);
+		this.setBackgroundResource(R.drawable.red);
 	}
 	/**funkcja ustawiajaca numerki na polach
 	 * 
