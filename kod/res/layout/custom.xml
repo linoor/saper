@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:layout_gravity="center_horizontal" >
  
     <ImageView
         android:id="@+id/image"
@@ -15,35 +16,35 @@
         android:layout_height="wrap_content"
         android:textColor="#FFF" 
         android:layout_toRightOf="@+id/image"/>/>
- 
+ 
      <Button
-        android:id="@+id/planszaMin"
-        android:layout_width="200px"
-        android:layout_height="wrap_content"
-        android:text="plansza 9x9, 10 min "
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="30dp"
-        android:layout_below="@+id/image"
-        />
-     
+         android:id="@+id/planszaMin"
+         android:layout_width="200px"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/image"
+         android:layout_centerHorizontal="true"
+         android:layout_marginRight="30dp"
+         android:layout_marginTop="5dp"
+         android:text="plansza 9x9, 10 min " />
+     
      <Button
-        android:id="@+id/planszaMed"
-        android:layout_width="200px"
-        android:layout_height="wrap_content"
-        android:text="plansza 16x16, 40 min "
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="30dp"
-        android:layout_below="@+id/image"
-        />
-     
+         android:id="@+id/planszaMed"
+         android:layout_width="200px"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/image"
+         android:layout_centerHorizontal="true"
+         android:layout_marginRight="30dp"
+         android:layout_marginTop="50dp"
+         android:text="plansza 16x16, 40 min " />
+     
      <Button
-        android:id="@+id/planszaMax"
-        android:layout_width="200px"
-        android:layout_height="wrap_content"
-        android:text="plansza 16x30, 99 min "
-        android:layout_marginTop="95dp"
-        android:layout_marginRight="30dp"
-        android:layout_below="@+id/image"
-        />
+         android:id="@+id/planszaMax"
+         android:layout_width="200px"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/image"
+         android:layout_centerHorizontal="true"
+         android:layout_marginRight="30dp"
+         android:layout_marginTop="95dp"
+         android:text="plansza 16x30, 99 min " />
  
 </RelativeLayout>
