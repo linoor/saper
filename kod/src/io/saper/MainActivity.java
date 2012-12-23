@@ -1,27 +1,24 @@
 package io.saper;
 
-import java.awt.font.NumericShaper;
 import java.util.Random;
 
-import android.os.Bundle;
-import android.os.Handler;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Typeface;
-import android.support.v4.app.DialogFragment;
+import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -32,6 +29,7 @@ private TextView zegar, minecount;
 private ImageButton smiley;
 private Block blocks[][];
 private TableLayout pole_minowe;
+private ScrollView scroll;
 private int number_of_rows = 9;
 private int number_of_columns = 9;
 private int wielkosc_pola = 15;
@@ -81,6 +79,7 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczonaSe
         
         /*ustawianie pola minowego*/
         pole_minowe = (TableLayout) findViewById(R.id.pole_minowe);
+        scroll = new ScrollView(this);
         
         // rozpoczecie gry
         startNewGame();
@@ -263,7 +262,6 @@ public void okienko()
 	Button dialogButton3 = (Button) dialog.findViewById(R.id.planszaMax);
 	// if button is clicked, close the custom dialog
 	dialogButton1.setOnClickListener(new OnClickListener() {
-		@Override
 		public void onClick(View v) {
 			ustaw(9,9,10);
 			startNewGame();
@@ -271,7 +269,6 @@ public void okienko()
 		}
 	});
 	dialogButton2.setOnClickListener(new OnClickListener() {
-		@Override
 		public void onClick(View v) {
 			ustaw(16,16,40);
 			startNewGame();
@@ -279,7 +276,6 @@ public void okienko()
 		}
 	});
 	dialogButton3.setOnClickListener(new OnClickListener() {
-		@Override
 		public void onClick(View v) {
 			ustaw(16,30,99);
 			startNewGame();

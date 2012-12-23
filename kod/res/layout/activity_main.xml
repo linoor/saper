@@ -4,9 +4,9 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/background"
-    android:stretchColumns="0,2">
-    
-  	<TableRow
+    android:stretchColumns="0,2" >
+
+    <TableRow
         android:id="@+id/tableRow1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
@@ -40,32 +40,39 @@
             android:text="@string/wartosc_poczatkowa_licznikow"
             android:textColor="@color/kolor_licznikow"
             android:textSize="7mm" />
-
     </TableRow>
-    
+
     <TableRow
         android:id="@+id/tableRow2"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:minHeight="25dp" >
-
     </TableRow>
-    
+
     <TableRow
         android:id="@+id/tableRow3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
-        
-        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-      android:id="@+id/pole_minowe"
-      android:layout_width="260dp"
-      android:layout_height="260dp"
-      android:gravity="bottom"
-      android:stretchColumns="*"
-      android:layout_span="3"
-      android:padding="5dip" >
-      </TableLayout>
+
+        <ScrollView
+            android:id="@+id/scroll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_span="3"
+            android:scrollbars="vertical"
+            android:visibility="visible" >
 
+            <TableLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/pole_minowe"
+                android:layout_width="260dp"
+                android:layout_height="260dp"
+                android:gravity="bottom"
+                android:padding="5dip"
+                android:stretchColumns="*" >
+            </TableLayout>
+        </ScrollView>
     </TableRow>
 
 </TableLayout>
