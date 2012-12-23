@@ -5,6 +5,7 @@ import java.util.Random;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -79,7 +80,6 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczonaSe
         
         /*ustawianie pola minowego*/
         pole_minowe = (TableLayout) findViewById(R.id.pole_minowe);
-        scroll = new ScrollView(this);
         
         // rozpoczecie gry
         startNewGame();
@@ -248,8 +248,9 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczonaSe
 public void okienko()
 {
 	final Dialog dialog = new Dialog(context);
-	dialog.setContentView(R.layout.custom);
 	dialog.setTitle("Wybor planszy");
+	dialog.setContentView(R.layout.custom);
+	
 
 	// set the custom dialog components - text, image and button
 	TextView text = (TextView) dialog.findViewById(R.id.text);
