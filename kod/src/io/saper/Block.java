@@ -39,6 +39,38 @@ public class Block extends Button
 		isCovered = false;
 		this.setBackgroundResource(R.drawable.szara);
 	}
+	/**funkcja ustawiajaca numerki na polach
+	 * 
+	 */
+	public void ustawLiczby(int row, int column)
+	{
+		final int liczbaMin = getMinesSurrounding();
+		setText(String.valueOf(liczbaMin));
+		
+		switch(liczbaMin)
+		{
+		case 1:
+			setTextColor(Color.WHITE);
+			break;
+		case 2:
+			setTextColor(Color.LTGRAY);
+			break;
+		case 3:
+			setTextColor(Color.BLUE);
+			break;
+		case 4:
+			setTextColor(Color.GREEN);
+			break;
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+			setTextColor(Color.WHITE);
+			break;
+			
+		}
+	}
 	/** ustawia mine */
 	public void setMine()
 	{
@@ -53,6 +85,10 @@ public class Block extends Button
 	public void setMinesSurrounding(int n)
 	{
 		numberOfMinesSurrounding = n;
+	}
+	public int getMinesSurrounding()
+	{
+		return numberOfMinesSurrounding;
 	}
 	/** sprawdza czy pole jest zakryte flag¹ */
 	public boolean isFlagged()

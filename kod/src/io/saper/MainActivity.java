@@ -33,7 +33,7 @@ private TableLayout pole_minowe;
 private ScrollView scroll;
 private int number_of_rows = 9;
 private int number_of_columns = 9;
-private int wielkosc_pola = 15;
+private int wielkosc_pola = 20;
 private final int odstep = 3;
 /** maksymalna liczba min */
 private int minesTotal = 10;
@@ -195,6 +195,7 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczonaSe
 						if(getBlocks()[currentRow][currentColumn].isCovered())
 						{
 							getBlocks()[currentRow][currentColumn].uncover();
+							getBlocks()[currentRow][currentColumn].ustawLiczby(currentRow, currentColumn);
 						}
 					}
 					
