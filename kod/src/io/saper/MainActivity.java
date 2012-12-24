@@ -240,7 +240,7 @@ private boolean isGameOver; // jeœli true, to gra zosta³a zakoñczonaSe
 							// update mineCount
 							updateMineCount();
 						}
-						if(minecount.getText().equals("0"))
+						if(minesToFind == 0)
 						{
 							if(checkWin())
 							{
@@ -277,12 +277,13 @@ private void rippleEffect(int row, int column)
 			final int wiersz = row + i - 1;
 			final int kolumna = column + j - 1;
 			if(blocks[wiersz][kolumna].isCovered() &&
-					wiersz < number_of_rows + 1 && kolumna < number_of_columns + 1 &&
+					wiersz < number_of_rows + 1 &&
+					kolumna < number_of_columns + 1 &&
 					wiersz > 0 && kolumna > 0)
 			{
-				
 				// t³umienie
-				Thread t = new Thread(new Runnable()
+				Handler handler = new Handler();
+				handler.postDelayed(new Runnable()
 				{
 
 					public void run()
@@ -291,8 +292,7 @@ private void rippleEffect(int row, int column)
 						
 					}
 					
-				});
-				t.run();
+				}, rand.nextLong()*4);
 			}
 		}
 	}
@@ -549,7 +549,7 @@ public void endGame()
 }
 
 /** funkcja pokazuj¹ca okienko w przypadku wygranej
- * @version 0.0
+ * @version 1.0
  */
 public void showDialogBox(String message, int seconds, boolean win)
 {
