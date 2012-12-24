@@ -289,7 +289,6 @@ private void rippleEffect(int row, int column)
 					public void run()
 					{
 						rippleEffect(wiersz, kolumna);
-						
 					}
 					
 				}, rand.nextLong()*4);
@@ -498,6 +497,7 @@ public void gameLose()
 	activateButtons(false);
 	//dodalam, bo tutaj chcemy, by wyzerowalo licznik 
 	minecount.setText("000");
+	odkryjMiny();
 	
 	showDialogBox("Niestety, przegra³eœ!", getCzas(), false);
 	
@@ -547,7 +547,23 @@ public void endGame()
 	
 	pole_minowe.removeAllViews();
 }
-
+/** funkcja odkrywajaca wszystkie miny
+ * 
+ */
+private void odkryjMiny()
+{
+	for(int row = 1; row < number_of_rows + 1; row++)
+	{
+		for(int column = 1; column < number_of_columns; column++)
+		{
+			Block block = blocks[row][column];
+			if(block.isMined())
+			{
+				block.setMineIcon();
+			}
+		}
+	}
+}
 /** funkcja pokazuj¹ca okienko w przypadku wygranej
  * @version 1.0
  */
