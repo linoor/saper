@@ -15,18 +15,26 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textColor="#FFF" 
-        android:layout_toRightOf="@+id/image"/>/>
- 
-     <Button
+        android:layout_toRightOf="@+id/image"/>
+        
+ 	<EditText
+        android:id="@+id/username"
+        android:inputType="text"
+        android:layout_width="200px"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="30dp"/>
+     
+ 	<Button
          android:id="@+id/planszaMin"
          android:layout_width="200px"
          android:layout_height="wrap_content"
          android:layout_below="@+id/image"
          android:layout_centerHorizontal="true"
          android:layout_marginRight="30dp"
-         android:layout_marginTop="5dp"
+         android:layout_marginTop="50dp"
          android:text="plansza 9x9, 10 min " />
-     
+ 	
      <Button
          android:id="@+id/planszaMed"
          android:layout_width="200px"
@@ -34,17 +42,16 @@
          android:layout_below="@+id/image"
          android:layout_centerHorizontal="true"
          android:layout_marginRight="30dp"
-         android:layout_marginTop="50dp"
+         android:layout_marginTop="95dp"
          android:text="plansza 16x16, 40 min " />
-     
-     <Button
+     	<Button
          android:id="@+id/planszaMax"
          android:layout_width="200px"
          android:layout_height="wrap_content"
          android:layout_below="@+id/image"
          android:layout_centerHorizontal="true"
          android:layout_marginRight="30dp"
-         android:layout_marginTop="95dp"
+         android:layout_marginTop="140dp"
          android:text="plansza 16x30, 99 min " />
  
 </RelativeLayout>

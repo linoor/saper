@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -40,7 +41,7 @@ private final int odstep = 3;
 private int minesTotal = 10;
 private int minesToFind; // pozosta³e do znalezienia miny
 final Context context = this;//uzywane przy okienkach
-
+private String nazwaUzytkownika;
 private Handler timer = new Handler();
 private int czas = 0;
 
@@ -304,37 +305,55 @@ public void okienko()
 	final Dialog dialog = new Dialog(context);
 	dialog.setTitle("Wybor planszy");
 	dialog.setContentView(R.layout.custom);
-	
 
 	// set the custom dialog components - text, image and button
 	TextView text = (TextView) dialog.findViewById(R.id.text);
-	text.setText("Wybierz jedna z mozliwych opcji");
+	text.setText("Wybierz jedn¹ z mo¿liwych opcji oraz podaj nazwê u¿ytkownika");
 	ImageView image = (ImageView) dialog.findViewById(R.id.image);
 	image.setImageResource(R.drawable.ic_launcher);
 
+	final EditText nazwaU = (EditText) dialog.findViewById(R.id.username);
 	Button dialogButton1 = (Button) dialog.findViewById(R.id.planszaMin);
 	Button dialogButton2 = (Button) dialog.findViewById(R.id.planszaMed);
 	Button dialogButton3 = (Button) dialog.findViewById(R.id.planszaMax);
 	// if button is clicked, close the custom dialog
 	dialogButton1.setOnClickListener(new OnClickListener() {
 		public void onClick(View v) {
-			ustaw(9,9,10);
-			startNewGame();
-			dialog.dismiss();
+			String nazwa = nazwaU.getText().toString();
+			if(!nazwa.equals(""))
+			{
+				nazwaUzytkownika = nazwa;
+				ustaw(9,9,10);
+				startNewGame();
+				dialog.dismiss();
+			}
+			else showMessage("Wpisz nazwe u¿ytkownika!!!");
 		}
 	});
 	dialogButton2.setOnClickListener(new OnClickListener() {
 		public void onClick(View v) {
-			ustaw(16,16,40);
-			startNewGame();
-			dialog.dismiss();
+			String nazwa=nazwaU.getText().toString();
+			if(!nazwa.equals(""))
+			{
+				nazwaUzytkownika = nazwa;
+				ustaw(16,16,40);
+				startNewGame();
+				dialog.dismiss();
+			}
+			else showMessage("Wpisz nazwe u¿ytkownika!!!");
 		}
 	});
 	dialogButton3.setOnClickListener(new OnClickListener() {
 		public void onClick(View v) {
-			ustaw(16,30,99);
-			startNewGame();
-			dialog.dismiss();
+			String nazwa=nazwaU.getText().toString();
+			if(!nazwa.equals(""))
+			{
+				nazwaUzytkownika = nazwa;
+				ustaw(16,30,99);
+				startNewGame();
+				dialog.dismiss();
+			}
+			else showMessage("Wpisz nazwe u¿ytkownika!!!");
 		}
 	});
 	dialog.show();
@@ -589,6 +608,19 @@ public void showDialogBox(String message, int seconds, boolean win)
 	l.addView(i,0);
 	
 	
+	toast.show();
+}
+/**funkcja wyswietlajace wiadomosc o blednych danych
+ * @param message - wyswietlana wiadomosc
+ */
+public void showMessage(String message)
+{
+	Context context = getApplicationContext();
+	CharSequence text = message;
+	int duration = Toast.LENGTH_LONG;
+	
+	Toast toast = Toast.makeText(context, text, duration);
+	toast.setGravity(Gravity.CENTER, 0, 0);
 	toast.show();
 }
 /**funkcja ustalajaca rozmiar planszy i liczbe min
