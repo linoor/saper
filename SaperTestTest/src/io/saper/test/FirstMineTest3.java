@@ -37,6 +37,7 @@ public class FirstMineTest3 extends ActivityInstrumentationTestCase2<MainActivit
 			Block block = (Block) solo.getButton(k);
 			Assert.assertEquals(false, block.isMined());
 			solo.clickOnImage(0);
+			solo.enterText(0,"test");
 			solo.clickOnButton(0);
 		}
 	}

@@ -33,7 +33,8 @@ public class ChoiceTest5 extends ActivityInstrumentationTestCase2<MainActivity>
 	{
 		for(int i = 0; i < 10; i++)
 		{
-			solo.clickOnImage(0);
+			if(i!=10)solo.clickOnImage(0);
+			solo.enterText(0,"test");
 			solo.clickOnButton(2);
 			TextView licznik = (TextView) solo.getView(R.id.licznik_min);
 			int rzedy = getActivity().rzedy();

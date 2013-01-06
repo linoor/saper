@@ -146,4 +146,12 @@ public class Gra {
     public void setAreMinesSet(boolean areMinesSet) {
     	this.areMinesSet = areMinesSet;
     }
+    public int rzedy()
+    {
+    	return m.rzedy();
+    }
+    public int kolumny()
+    {
+    	return m.kolumny();
+    }
 }

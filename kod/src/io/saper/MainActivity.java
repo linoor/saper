@@ -73,6 +73,16 @@ final Context context = this;//uzywane przy okienkach
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
     }
+    public int rzedy()
+    {
+    	Gra g = Gra.getInstance();
+    	return g.rzedy();
+    }
+    public int kolumny()
+    {
+    	Gra g = Gra.getInstance();
+    	return g.kolumny();
+    }
 
     
 }

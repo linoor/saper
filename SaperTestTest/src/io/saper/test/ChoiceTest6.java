@@ -31,7 +31,7 @@ public class ChoiceTest6 extends ActivityInstrumentationTestCase2<MainActivity>
 	
 	public void testChoice4() throws InterruptedException
 	{
-		solo.clickOnImage(0);
+		solo.enterText(0,"test");
 		solo.clickOnButton(2);
 		TextView licznik = (TextView) solo.getView(R.id.licznik_min);
 		solo.sleep(100000);
