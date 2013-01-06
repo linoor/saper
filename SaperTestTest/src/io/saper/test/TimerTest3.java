@@ -33,6 +33,8 @@ public class TimerTest3 extends ActivityInstrumentationTestCase2<MainActivity>
 	
 	public void testTimer() throws InterruptedException
 	{
+		solo.enterText(0,"test");
+		solo.clickOnButton(0);
 		// sprawdzamy czy zegar nie ruszy³
 		TextView zegar = (TextView) solo.getView(R.id.timer);
 		String co_licznik=(zegar.getText()).toString();

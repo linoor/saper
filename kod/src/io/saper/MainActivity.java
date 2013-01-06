@@ -83,6 +83,19 @@ final Context context = this;//uzywane przy okienkach
     	Gra g = Gra.getInstance();
     	return g.kolumny();
     }
-
-    
+    public boolean checkWin()
+    {
+    	Gra g = Gra.getInstance();
+    	return g.checkWin();
+    }
+    public void stopTimer()
+    {
+    	Zegar z = Zegar.getInstance();
+    	z.stopTimer();
+    }
+    public boolean isGameOver()
+    {
+    	Gra g = Gra.getInstance();
+    	return g.isGameOver();
+    }
 }

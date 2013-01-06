@@ -37,6 +37,8 @@ public class TimerTest2 extends ActivityInstrumentationTestCase2<MainActivity>
 	public void testTimer() throws InterruptedException
 	{
 		// sprawdzamy czy zegar ruszy³ i prawid³owo wskazuje czas
+		solo.enterText(0,"test");
+		solo.clickOnButton(0);
 		Random rand = new Random();
 		TextView zegar = (TextView) solo.getView(R.id.timer);
 		Block block = (Block) solo.getButton(rand.nextInt(9*9));

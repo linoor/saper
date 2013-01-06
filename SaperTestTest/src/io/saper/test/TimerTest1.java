@@ -36,6 +36,8 @@ public class TimerTest1 extends ActivityInstrumentationTestCase2<MainActivity>
 	
 	public void testTimer() throws InterruptedException
 	{
+		solo.enterText(0,"test");
+		solo.clickOnButton(0);
 		Random rand = new Random();
 		int nr = rand.nextInt(81);
 		//TextView zegar = (TextView) solo.getView(R.id.timer);

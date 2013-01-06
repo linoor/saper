@@ -27,6 +27,8 @@ public class toastTest extends ActivityInstrumentationTestCase2<MainActivity>
 	
 	public void testDialog()
 	{
+		solo.enterText(0,"test");
+		solo.clickOnButton(0);
 		solo.sleep(1000);
 		Context context = getActivity().getApplicationContext();
 		CharSequence text = "Hello Toast";

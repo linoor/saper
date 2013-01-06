@@ -7,6 +7,7 @@ import junit.framework.Assert;
 import com.jayway.android.robotium.solo.Solo;
 
 import io.saper.Block;
+import io.saper.Gra;
 import io.saper.MainActivity;
 import io.saper.R;
 import android.test.ActivityInstrumentationTestCase2;
@@ -34,6 +35,8 @@ public class ShortClickTest extends ActivityInstrumentationTestCase2<MainActivit
 	
 	public void testShortClick()
 	{
+		solo.enterText(0,"test");
+		solo.clickOnButton(0);
 		Random rand = new Random();
 		for(int i = 0; i < 10; i++)
 		{

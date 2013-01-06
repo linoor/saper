@@ -29,6 +29,8 @@ public class stopTimer extends ActivityInstrumentationTestCase2<MainActivity>
 	
 	public void testShortClick()
 	{
+		solo.enterText(0,"test");
+		solo.clickOnButton(0);
 		Random rand = new Random();
 		for(int i = 0; i < 3; i++)
 		{

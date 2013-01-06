@@ -27,9 +27,12 @@ public class WinGameTest extends ActivityInstrumentationTestCase2<MainActivity>
 	
 	public void testGameWin()
 	{
-		for(int i = 0; i < 9*9; i++)
+		solo.enterText(0,"test");
+		solo.clickOnButton(0);
+		Block block = (Block) solo.getButton(0);
+		for(int i = 1; i < 9*9; i++)
 		{
-			Block block = (Block) solo.getButton(i);
+			block = (Block) solo.getButton(i);
 			if(!block.isMined())
 			{
 				solo.clickOnView(block);
