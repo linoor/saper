@@ -37,6 +37,8 @@ public class FlagTest9 extends ActivityInstrumentationTestCase2<MainActivity>
 	{
 		//boolean oflagowany=true;
 		//Random rand = new Random();
+		solo.enterText(0,"test");
+		solo.clickOnButton(0);
 		Block block = null;
 		// losuje punkt
 		block = (Block) solo.getButton(80);

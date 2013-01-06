@@ -11,6 +11,7 @@ import io.saper.MainActivity;
 //import io.saper.R;
 import android.test.ActivityInstrumentationTestCase2;
 //import android.widget.TextView;
+import android.widget.TextView;
 
 public class FlagTest11 extends ActivityInstrumentationTestCase2<MainActivity>
 {
@@ -39,6 +40,9 @@ public class FlagTest11 extends ActivityInstrumentationTestCase2<MainActivity>
 		Block block = null;
 		for(int i=0;i<2;i++)
 		{
+			if(i!=0)solo.clickOnImage(0);
+			solo.enterText(0,"test");
+			solo.clickOnButton(0);
 			oflagowany=true;
 			while(oflagowany)
 			{

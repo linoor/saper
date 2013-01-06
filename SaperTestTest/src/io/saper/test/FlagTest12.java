@@ -11,6 +11,7 @@ import io.saper.MainActivity;
 //import io.saper.R;
 import android.test.ActivityInstrumentationTestCase2;
 //import android.widget.TextView;
+import android.widget.TextView;
 
 public class FlagTest12 extends ActivityInstrumentationTestCase2<MainActivity>
 {
@@ -37,6 +38,8 @@ public class FlagTest12 extends ActivityInstrumentationTestCase2<MainActivity>
 	{
 		//boolean oflagowany=true;
 		//Random rand = new Random();
+		solo.enterText(0,"test");
+		solo.clickOnButton(0);
 		Block block = null;
 		// losuje punkt
 		block = (Block) solo.getButton(8);

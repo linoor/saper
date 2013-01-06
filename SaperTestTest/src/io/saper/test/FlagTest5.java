@@ -36,6 +36,8 @@ public class FlagTest5 extends ActivityInstrumentationTestCase2<MainActivity>
 	public void testFlags()
 	{
 		Random rand = new Random();
+		solo.enterText(0,"test");
+		solo.clickOnButton(0);
 		// klika na dziesiec losowych punktow i zaznacza na nich flagi
 		for(int i = 0; i < 9; i++)
 		{

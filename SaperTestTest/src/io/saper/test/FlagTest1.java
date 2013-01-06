@@ -35,6 +35,8 @@ public class FlagTest1 extends ActivityInstrumentationTestCase2<MainActivity>
 	
 	public void testFlags()
 	{
+		solo.enterText(0,"test");
+		solo.clickOnButton(0);
 		boolean oflagowany=true;
 		boolean zaminowany=false;
 		Random rand = new Random();

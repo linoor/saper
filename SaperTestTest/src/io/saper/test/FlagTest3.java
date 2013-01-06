@@ -39,6 +39,8 @@ public class FlagTest3 extends ActivityInstrumentationTestCase2<MainActivity>
 		int nr=0;//tu bedzie numer kliknietego pola
 		Block block = null;
 		// klika na 5 losowych punktowi zaznacza na nich flagi
+		solo.enterText(0,"test");
+		solo.clickOnButton(0);
 		for(int i = 0; i < 1; i++)
 		{
 			nr=rand.nextInt(9*9);
