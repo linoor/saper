@@ -154,4 +154,8 @@ public class Gra {
     {
     	return m.kolumny();
     }
+    public Block[][] getBlocks()
+    {
+    	return m.getBlocks();
+    }
 }

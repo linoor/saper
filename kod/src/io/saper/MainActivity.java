@@ -83,10 +83,25 @@ final Context context = this;//uzywane przy okienkach
     	Gra g = Gra.getInstance();
     	return g.kolumny();
     }
+    public int getMinesToFind()
+    {
+    	Gra g = Gra.getInstance();
+    	return g.getMinesToFind();
+    }
+    public int getMinesTotal()
+    {
+    	Gra g = Gra.getInstance();
+    	return g.getMinesTotal();
+    }
     public boolean checkWin()
     {
     	Gra g = Gra.getInstance();
     	return g.checkWin();
+    }
+    public boolean isTimerstarted()
+    {
+    	Zegar z = Zegar.getInstance();
+    	return z.isTimerstarted();
     }
     public void stopTimer()
     {
@@ -97,5 +112,20 @@ final Context context = this;//uzywane przy okienkach
     {
     	Gra g = Gra.getInstance();
     	return g.isGameOver();
+    }
+    public boolean isAreMinesSet()
+    {
+    	Gra g = Gra.getInstance();
+    	return g.isAreMinesSet();
+    }
+    public int getCzas()
+    {
+    	Zegar z = Zegar.getInstance();
+    	return z.getCzas();
+    }
+    public Block[][] getBlocks()
+    {
+    	Gra g = Gra.getInstance();
+    	return g.getBlocks();
     }
 }

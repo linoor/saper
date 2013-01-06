@@ -56,7 +56,8 @@ public class Test1 extends ActivityInstrumentationTestCase2<MainActivity>
 			//tu blad wyskakuje - moze jednak zwykle klikanie
 			//getActivity().ustaw(columns,rows,mines);
 			//getActivity().startNewGame();
-			solo.clickOnImage(0);
+			if(i!=0)solo.clickOnImage(0);
+			solo.enterText(0,"test");
 			solo.clickOnButton(nr);
 			Assert.assertEquals(0, getActivity().getCzas());
 			Assert.assertEquals(false,getActivity().isGameOver());
