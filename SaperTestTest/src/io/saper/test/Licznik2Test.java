@@ -36,6 +36,9 @@ public class Licznik2Test extends
 		Random rand = new Random();
 		for(int i = 0; i < 1; i++)
 		{
+			if(i!=0)solo.clickOnImage(0);
+			solo.enterText(0,"test");
+			solo.clickOnButton(0);
 			Block block = (Block) solo.getButton(rand.nextInt(9*9));
 			solo.clickLongOnView(block);
 			TextView licznik = (TextView) solo.getView(R.id.licznik_min);

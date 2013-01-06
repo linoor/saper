@@ -38,6 +38,8 @@ public class FlagTimerTest1 extends ActivityInstrumentationTestCase2<MainActivit
 	{
 		Random rand = new Random();
 		int nr = rand.nextInt(81);
+		solo.enterText(0,"test");
+		solo.clickOnButton(0);
 		TextView zegar = (TextView) solo.getView(R.id.timer);
 		// klikamy na jakis przycisk
 		Block block = (Block) solo.getButton(nr);

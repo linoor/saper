@@ -38,6 +38,8 @@ public class MineTest1 extends ActivityInstrumentationTestCase2<MainActivity>
 	{
 		Random rand = new Random();
 		int nr = rand.nextInt(81);
+		solo.enterText(0,"test");
+		solo.clickOnButton(0);
 		Block block = (Block) solo.getButton(nr);
 		solo.clickOnView(block);
 		boolean zaminowany = block.isMined();

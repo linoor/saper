@@ -40,6 +40,8 @@ public class MineTest2 extends ActivityInstrumentationTestCase2<MainActivity>
 		//int nr = rand.nextInt(81);
 		//TextView zegar = (TextView) solo.getView(R.id.timer);
 		// klikamy na jakis przycisk
+		solo.enterText(0,"test");
+		solo.clickOnButton(0);
 		Block block = (Block) solo.getButton(0);
 		solo.clickOnView(block);
 		boolean zaminowany = block.isMined();

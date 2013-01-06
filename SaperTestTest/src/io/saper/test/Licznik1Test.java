@@ -34,6 +34,8 @@ public class Licznik1Test extends
 	public void testShortClick()
 	{
 		//Random rand = new Random();
+		solo.enterText(0,"test");
+		solo.clickOnButton(0);
 		for(int i = 0; i < 1; i++)
 		{
 			TextView licznik = (TextView) solo.getView(R.id.licznik_min);

@@ -38,6 +38,8 @@ public class FlagTimerTest4 extends ActivityInstrumentationTestCase2<MainActivit
 	{
 		TextView zegar = (TextView) solo.getView(R.id.timer);
 		// klikamy na jakis przycisk
+		solo.enterText(0,"test");
+		solo.clickOnButton(0);
 		Block block = (Block) solo.getButton(72);
 		solo.clickOnView(block);
 		solo.sleep(1000);

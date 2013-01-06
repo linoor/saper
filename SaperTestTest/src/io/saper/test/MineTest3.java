@@ -36,6 +36,8 @@ public class MineTest3 extends ActivityInstrumentationTestCase2<MainActivity>
 	
 	public void testTimer() throws InterruptedException
 	{
+		solo.enterText(0,"test");
+		solo.clickOnButton(0);
 		Block block = (Block) solo.getButton(80);
 		solo.clickOnView(block);
 		boolean zaminowany = block.isMined();

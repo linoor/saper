@@ -26,6 +26,8 @@ public class KlawiszeTest extends
 	{
 		// klikamy na iles przyciskow
 		boolean ok=true;//czy wszystkie klikniete nieodkryte zostaly odkryte
+		solo.enterText(0,"test");
+		solo.clickOnButton(0);
 		for(int i=0;i<30;i++)
 		{
 			boolean zrobiono=false;
