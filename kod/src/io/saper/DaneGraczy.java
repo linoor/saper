@@ -80,10 +80,21 @@ class Dane{
 }
 
 public class DaneGraczy {
+	private static volatile DaneGraczy Instance;
+	private DaneGraczy() throws Exception
+	{
+		otworzStatystyki();
+	}
 	private String nazwaGracza;
 	private Plansza plansza;
 	private Map<String,Dane> statystyki;
-	
+	public static DaneGraczy getInstance() throws Exception {
+	    if (Instance == null)
+	    synchronized(DaneGraczy.class) {
+	         if (Instance == null) Instance = new DaneGraczy();
+	    	}
+	     return Instance;
+	}
 	private void zapiszStatystki() throws Exception
 	{
 		ObjectOutputStream out = new ObjectOutputStream( new FileOutputStream( "saperStat" ) );
@@ -127,12 +138,6 @@ public class DaneGraczy {
 	public Plansza getPlansza()
 	{
 		return plansza;
-	}
-	public DaneGraczy(String nazwa, Plansza p) throws Exception
-	{
-		setNazwaGracza(nazwa);
-		setPlansza(p);
-		otworzStatystyki();
 	}
 	/**
 	 * zmienia stan statystyk
