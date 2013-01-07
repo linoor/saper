@@ -190,5 +190,19 @@ public class DaneGraczy {
 		}
 		statystyki.put(nazwaGracza,d);
 	}
+	public String najlepszyWynik()
+	{
+		Dane d = statystyki.get(nazwaGracza);
+		String wiadomosc="";
+		if(d==null)wiadomosc="Brak twojego najlepszego wyniku";
+		else
+		{
+			String czas = d.getCzas(plansza);
+			if(czas.equals("-"))wiadomosc="Brak twojego najlepszego wyniku";
+			else wiadomosc="Twój najlepszy wynik to "+czas+"s";
+		}
+		return wiadomosc;
+	}
+
 
 }
