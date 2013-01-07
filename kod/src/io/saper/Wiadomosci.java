@@ -25,27 +25,26 @@ public class Wiadomosci {
 		String nazwa = nazwaU.getText().toString();
 		if(!nazwa.equals(""))
 		{
-			Wiadomosci.showMessage(context, "ok");
-			/*try{
-				//DaneGraczy d = DaneGraczy.getInstance();
-				//d.setNazwaGracza(nazwa);
-				//if(miny==10)d.setPlansza(Plansza.Min);
-				//else if(miny==40)d.setPlansza(Plansza.Med);
-				//else d.setPlansza(Plansza.Max);*/
+			try{
+				DaneGraczy d = DaneGraczy.getInstance();
+				d.setNazwaGracza(nazwa);
+				if(miny==10)d.setPlansza(Plansza.Min);
+				else if(miny==40)d.setPlansza(Plansza.Med);
+				else d.setPlansza(Plansza.Max);
 				g.ustaw(rzedy,kolumny,miny);
 				g.startNewGame();
-			/*}
+			}
 			catch(Exception e){}
-			finally{*/
+			finally{
 				dialog.dismiss();
-			//}
+			}
 		}
-		else Wiadomosci.showMessage(context,"Wpisz nazwe u¿ytkownika!!!");
+		else Wiadomosci.showMessage("Wpisz nazwe u¿ytkownika!!!");
 	}
 	/** funkcja pokazuj¹ca okienko w przypadku wygranej
 	 * @version 1.0
 	 */
-	public static void showDialogBox(Context context, String message, int seconds, boolean win)
+	public static void showDialogBox(String message, int seconds, boolean win)
 	{
 		CharSequence text = message + "\nCzas gry: " + String.valueOf(seconds) + " sekund";
 		int duration = Toast.LENGTH_LONG;
@@ -71,7 +70,7 @@ public class Wiadomosci {
 	/**funkcja wyswietlajace wiadomosc o blednych danych
 	 * @param message - wyswietlana wiadomosc
 	 */
-	public static void showMessage(Context context,String message)
+	public static void showMessage(String message)
 	{
 		CharSequence text = message;
 		int duration = Toast.LENGTH_LONG;

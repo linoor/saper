@@ -81,14 +81,14 @@ class Dane{
 
 public class DaneGraczy {
 	private static volatile DaneGraczy Instance;
-	private DaneGraczy() throws Exception
+	private DaneGraczy()
 	{
 		otworzStatystyki();
 	}
 	private String nazwaGracza;
 	private Plansza plansza;
 	private Map<String,Dane> statystyki;
-	public static DaneGraczy getInstance() throws Exception {
+	public static DaneGraczy getInstance() {
 	    if (Instance == null)
 	    synchronized(DaneGraczy.class) {
 	         if (Instance == null) Instance = new DaneGraczy();
@@ -102,9 +102,11 @@ public class DaneGraczy {
 	    out.close();
 	}
 	
-	private void otworzStatystyki() throws Exception
+	private void otworzStatystyki()
 	{
 		FileInputStream f = null;
+		ObjectInputStream in = null;
+		boolean czyOtwierac = true;
 		try
 		{
 			f = new FileInputStream( "saperStat" );
@@ -112,14 +114,29 @@ public class DaneGraczy {
 		catch(FileNotFoundException e)
 		{
 			statystyki = new HashMap<String,Dane>();
+			czyOtwierac = false;
 		}
-		ObjectInputStream in = new ObjectInputStream( f );
+		catch(Exception e)
+		{
+			czyOtwierac = false;
+			Wiadomosci.showMessage("wyjatek przy otwieraniu statystyk");
+		}
         try {
-            Map<String,Dane> readObject = (Map<String,Dane>)in.readObject();
-			statystyki =  readObject;
+        	if(czyOtwierac)
+        	{
+        		in = new ObjectInputStream( f );
+        		Map<String,Dane> readObject = (Map<String,Dane>)in.readObject();
+        		statystyki =  readObject;
+        	}
+        }
+        catch(Exception e)
+        {
+        	Wiadomosci.showMessage("wyjatek przy wczytywaniu statystyk");
         }
         finally {
-            in.close();
+        	try{
+        		if(czyOtwierac)in.close();
+        	}catch(Exception e){}
         }
 	}
 	

@@ -56,7 +56,6 @@ public class Gra {
     	LicznikMin l = LicznikMin.getInstance();
     	Zegar z = Zegar.getInstance();
         setMinesToFind(getMinesTotal());
-        Wiadomosci.showMessage(context, "ok");
         //poprawne wyswietlanie liczby min
         l.updateMineCount();
         // pokazuje pole minowe
@@ -103,7 +102,8 @@ public class Gra {
     	//niech wyzeruje licznik min!
     	setMinesToFind(0);
     	l.updateMineCount();
-    	Wiadomosci.showDialogBox(context,"Gratulacje, wygra³eœ!",z.getCzas(),true);
+    	DaneGraczy d = DaneGraczy.getInstance();
+    	Wiadomosci.showDialogBox("Gratulacje, "+d.getNazwaGracza()+", wygra³eœ!",z.getCzas(),true);
     	
     }
     /** funkcja wywo³ywana przy przegraniu gry
@@ -121,7 +121,8 @@ public class Gra {
     	setMinesToFind(0);
     	l.updateMineCount();
     	m.odkryjMiny();
-    	Wiadomosci.showDialogBox(context,"Niestety, przegra³eœ!", z.getCzas(), false);
+    	DaneGraczy d = DaneGraczy.getInstance();
+    	Wiadomosci.showDialogBox("Niestety, "+d.getNazwaGracza()+", przegra³eœ!", z.getCzas(), false);
     	
     }
     /** funkcja koñcz¹ca obecn¹ grê
