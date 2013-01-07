@@ -95,11 +95,22 @@ public class DaneGraczy {
 	    	}
 	     return Instance;
 	}
-	private void zapiszStatystki() throws Exception
+	private void zapiszStatystyki()
 	{
-		ObjectOutputStream out = new ObjectOutputStream( new FileOutputStream( "saperStat" ) );
-	    out.writeObject( statystyki );
-	    out.close();
+		try
+		{
+			ObjectOutputStream out = new ObjectOutputStream( new FileOutputStream( "saperStat" ) );
+			out.writeObject( statystyki );
+			out.close();
+		}
+		catch(FileNotFoundException e)
+		{
+			Wiadomosci.showMessage("plik nie znaleziony");
+		}
+		catch(Exception e)
+		{
+			Wiadomosci.showMessage("b³¹d przy zapisie statystyk");
+		}
 	}
 	
 	private void otworzStatystyki()
@@ -189,6 +200,7 @@ public class DaneGraczy {
 			}
 		}
 		statystyki.put(nazwaGracza,d);
+		zapiszStatystyki();
 	}
 	public String najlepszyWynik()
 	{
