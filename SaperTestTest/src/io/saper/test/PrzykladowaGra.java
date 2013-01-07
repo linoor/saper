@@ -28,21 +28,15 @@ public class PrzykladowaGra extends
 	{
 		solo.enterText(0,"test");
 		solo.clickOnButton(0);
+		Random rand = new Random();
 		// klikamy na iles przyciskow
-		boolean ok=true;//czy wszystkie klikniete nieodkryte zostaly odkryte
-		for(int i=0;i<71;i++)
+		int nr0 = rand.nextInt(81);
+		Block klawisz = (Block) solo.getButton(nr0);
+		solo.clickOnButton(nr0);
+		for(int i=0;i<81;i++)
 		{
-			boolean zrobiono=false;
-			int nr = 0;
-			Block klawisz = null;
-			Random rand = new Random();
-			while(!zrobiono)
-			{
-				nr=rand.nextInt(81);
-				klawisz = (Block) solo.getButton(nr);
-				if(klawisz.isCovered() && !klawisz.isMined())zrobiono=true;
-			}
-			solo.clickOnButton(nr);
+			klawisz = (Block) solo.getButton(i);
+			if(klawisz.isCovered() && !klawisz.isMined())solo.clickOnButton(i);
 			/*if(solo.waitForText("M", 1, 20))ok=false;
 			Assert.assertTrue(ok);*/
 		}

@@ -30,6 +30,7 @@ public class WinGameTest extends ActivityInstrumentationTestCase2<MainActivity>
 		solo.enterText(0,"test");
 		solo.clickOnButton(0);
 		Block block = (Block) solo.getButton(0);
+		solo.clickOnView(block);
 		for(int i = 1; i < 9*9; i++)
 		{
 			block = (Block) solo.getButton(i);
