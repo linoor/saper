@@ -39,12 +39,19 @@ public class RippleTest1 extends ActivityInstrumentationTestCase2<MainActivity>
 		{
 			block = (Block) solo.getButton(i);
 			String wynik = (block.getText()).toString();
-			if(!block.isCovered() && block.getMinesSurrounding() != 0)
+			if(!block.isCovered())
 			{
-				String ileMin = new Integer(block.getMinesSurrounding()).toString();
-				Assert.assertEquals(ileMin, wynik);
+				if(block.getMinesSurrounding() != 0)
+				{
+					String ileMin = new Integer(block.getMinesSurrounding()).toString();
+					Assert.assertEquals(ileMin, wynik);
+				}
+				else
+				{
+					Assert.assertEquals("", wynik);
+				}
 			}
-		solo.clickOnView(block);
+		//solo.clickOnView(block);
 		}
 		
 	}
