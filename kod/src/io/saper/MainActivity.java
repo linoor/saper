@@ -62,6 +62,7 @@ final Context context = this;//uzywane przy okienkach
         l.init(minecount);
         Wiadomosci.init(context);
         d.init(context);
+        d.wczytajStat();
         l.updateMineCount();
         // ustawianie klikniêcia przy buŸce
         b.init(context, smiley);

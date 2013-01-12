@@ -86,10 +86,7 @@ class Dane implements Serializable{
 
 public class DaneGraczy {
 	private static volatile DaneGraczy Instance;
-	private DaneGraczy()
-	{
-		otworzStatystyki();
-	}
+	private DaneGraczy(){}
 	private Context context;
 	private String nazwaGracza;
 	private Plansza plansza;
@@ -145,7 +142,8 @@ public class DaneGraczy {
 		boolean czyOtwierac = true;
 		try
 		{
-			f = new FileInputStream( "saperStat" );
+			f = context.openFileInput("saperStat");
+			if(f == null)Wiadomosci.showMessage("null");
 		}
 		catch(FileNotFoundException e)
 		{
@@ -245,5 +243,8 @@ public class DaneGraczy {
 		return wiadomosc;
 	}
 
-
+	public void wczytajStat()
+	{
+		otworzStatystyki();
+	}
 }
