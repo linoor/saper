@@ -219,7 +219,8 @@ public class DaneGraczy {
 			{
 				d.zwiekszLiczbeWygranychGier();
 				String poprzedniCzas = d.getCzas(plansza);
-				if(poprzedniCzas.equals("-") || (poprzedniCzas.compareTo(czas) > 0))
+				if(poprzedniCzas.equals("-") || 
+						Integer.parseInt(poprzedniCzas) > Integer.parseInt(czas))
 				{
 					d.setCzas(plansza,czas);
 					d.zwiekszLiczbeWygranychGier();
@@ -237,8 +238,8 @@ public class DaneGraczy {
 		else
 		{
 			String czas = d.getCzas(plansza);
-			if(czas.equals("-"))wiadomosc="Brak twojego najlepszego wyniku";
-			else wiadomosc="Twój najlepszy wynik to "+czas+"s";
+			if(czas.equals("-"))wiadomosc="Brak twojego najlepszego wyniku na tej planszy";
+			else wiadomosc="Twój najlepszy wynik na tej planszy to "+czas+" s";
 		}
 		return wiadomosc;
 	}
