@@ -42,6 +42,7 @@ final Context context = this;//uzywane przy okienkach
         Gra g =  Gra.getInstance();
         LicznikMin l = LicznikMin.getInstance();
         Zegar z = Zegar.getInstance();
+        DaneGraczy d = DaneGraczy.getInstance();
         
         /*tworzenie napisów(liczników)*/
         zegar = (TextView) findViewById(R.id.timer);
@@ -60,6 +61,7 @@ final Context context = this;//uzywane przy okienkach
         z.init(zegar);
         l.init(minecount);
         Wiadomosci.init(context);
+        d.init(context);
         l.updateMineCount();
         // ustawianie klikniêcia przy buŸce
         b.init(context, smiley);

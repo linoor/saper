@@ -3,12 +3,17 @@ package io.saper;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InvalidClassException;
+import java.io.NotSerializableException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import android.content.Context;
 
-class Czas
+class Czas implements Serializable
 {
 	private String czas;
 	public Czas()
@@ -26,7 +31,7 @@ class Czas
 	}
 }
 
-class Czasy
+class Czasy implements Serializable
 {
 	Czas min;
 	Czas med;
@@ -51,7 +56,7 @@ class Czasy
 	}
 }
 
-class Dane{
+class Dane implements Serializable{
 	private int ileRozegranych;
 	private int ileWygranych;
 	private Czasy czasy;
@@ -85,9 +90,10 @@ public class DaneGraczy {
 	{
 		otworzStatystyki();
 	}
+	private Context context;
 	private String nazwaGracza;
 	private Plansza plansza;
-	private Map<String,Dane> statystyki;
+	private HashMap<String,Dane> statystyki;
 	public static DaneGraczy getInstance() {
 	    if (Instance == null)
 	    synchronized(DaneGraczy.class) {
@@ -99,7 +105,10 @@ public class DaneGraczy {
 	{
 		try
 		{
-			ObjectOutputStream out = new ObjectOutputStream( new FileOutputStream( "saperStat" ) );
+			FileOutputStream f = context.openFileOutput("saperStat", Context.MODE_PRIVATE);
+			if(f == null)Wiadomosci.showMessage("null");
+			ObjectOutputStream out = new ObjectOutputStream( f );
+			//if(out == null)Wiadomosci.showMessage("null");
 			out.writeObject( statystyki );
 			out.close();
 		}
@@ -107,9 +116,25 @@ public class DaneGraczy {
 		{
 			Wiadomosci.showMessage("plik nie znaleziony");
 		}
-		catch(Exception e)
+		catch(NullPointerException e)
 		{
-			Wiadomosci.showMessage("b³¹d przy zapisie statystyk");
+			Wiadomosci.showMessage("b³¹d przy zapisie statystyk - null");
+		}
+		catch(SecurityException e)
+		{
+			Wiadomosci.showMessage("b³¹d przy zapisie statystyk - security");
+		}
+		catch(InvalidClassException e)
+		{
+			Wiadomosci.showMessage("i");
+		}
+		catch(NotSerializableException e)
+		{
+			Wiadomosci.showMessage("nieserializowalne");
+		}
+		catch(IOException e)
+		{
+			Wiadomosci.showMessage("b³¹d przy zapisie statystyk - IO");
 		}
 	}
 	
@@ -136,7 +161,7 @@ public class DaneGraczy {
         	if(czyOtwierac)
         	{
         		in = new ObjectInputStream( f );
-        		Map<String,Dane> readObject = (Map<String,Dane>)in.readObject();
+        		HashMap<String,Dane> readObject = (HashMap<String,Dane>)in.readObject();
         		statystyki =  readObject;
         	}
         }
@@ -151,6 +176,10 @@ public class DaneGraczy {
         }
 	}
 	
+	public void init(Context context)
+	{
+		this.context = context;
+	}
 	public void setNazwaGracza(String nazwa)
 	{
 		nazwaGracza=nazwa;
