@@ -1,4 +1,4 @@
-package io.saper.structtest;
+package io.saper.test;
 
 import java.util.Random;
 
@@ -12,12 +12,12 @@ import com.jayway.android.robotium.solo.Solo;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-public class Test2 extends ActivityInstrumentationTestCase2<MainActivity>
+public class Test1 extends ActivityInstrumentationTestCase2<MainActivity>
 {
 
 	private Solo solo;
 	
-	public Test2()
+	public Test1()
 	{
 		super("io.saper", MainActivity.class);
 	}
@@ -56,13 +56,25 @@ public class Test2 extends ActivityInstrumentationTestCase2<MainActivity>
 			//tu blad wyskakuje - moze jednak zwykle klikanie
 			//getActivity().ustaw(columns,rows,mines);
 			//getActivity().startNewGame();
-			solo.clickOnImage(0);
+			if(i!=0)solo.clickOnImage(0);
+			solo.enterText(0,"test");
 			solo.clickOnButton(nr);
-			//po kliknieciu klawisza - czy zegar chodzi i czy miny ustawione?
-			nr = rand.nextInt(columns*rows);
-			solo.clickOnButton(nr);
-			Assert.assertEquals(true,getActivity().isTimerstarted());
-			Assert.assertEquals(true,getActivity().isAreMinesSet());
+			Assert.assertEquals(0, getActivity().getCzas());
+			Assert.assertEquals(false,getActivity().isGameOver());
+			Assert.assertEquals(mines,getActivity().getMinesToFind());
+			Assert.assertEquals(mines,getActivity().getMinesTotal());
+			Assert.assertEquals(columns,getActivity().kolumny());
+			Assert.assertEquals(rows,getActivity().rzedy());
+			Assert.assertEquals(false,getActivity().isTimerstarted());
+			Assert.assertEquals(false,getActivity().isAreMinesSet());
+			for(int j=1;j<=rows;j++)
+				for(int k=1;k<=columns;k++)
+				{
+					Block b = getActivity().getBlocks()[j][k];
+					Assert.assertEquals(true,b.isCovered());
+					Assert.assertEquals(false,b.isFlagged());
+					Assert.assertEquals(false,b.isMined());
+				}
 		}
 	}
 

@@ -1,4 +1,4 @@
-package io.saper.structtest;
+package io.saper.test;
 
 import java.util.Random;
 
