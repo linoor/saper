@@ -89,7 +89,7 @@ class Dane implements Serializable{
 
 public class DaneGraczy {
 	private static volatile DaneGraczy Instance;
-	private DaneGraczy(){}
+	private DaneGraczy(){nazwaGracza="";}
 	private TextView stat;
 	private Context context;
 	private String nazwaGracza;

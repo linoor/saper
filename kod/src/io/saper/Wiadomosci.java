@@ -92,6 +92,8 @@ public class Wiadomosci {
 		image.setImageResource(R.drawable.ic_launcher);
 
 		final EditText nazwaU = (EditText) dialog.findViewById(R.id.username);
+		DaneGraczy d = DaneGraczy.getInstance();
+		nazwaU.setText(d.getNazwaGracza());
 		Button dialogButton1 = (Button) dialog.findViewById(R.id.planszaMin);
 		Button dialogButton2 = (Button) dialog.findViewById(R.id.planszaMed);
 		Button dialogButton3 = (Button) dialog.findViewById(R.id.planszaMax);
