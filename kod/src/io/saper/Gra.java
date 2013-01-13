@@ -143,7 +143,6 @@ public class Gra {
     	z.update();
     	z.setTimerstarted(false);
     	setAreMinesSet(false);
-    	isGameOver = false;
     	setMinesToFind(0);
     	
     	pole_minowe.removeAllViews();

@@ -36,14 +36,16 @@ public class testCase112 extends ActivityInstrumentationTestCase2<MainActivity>
 		solo.clickOnButton(0);
 		
 		
-		for(int i = 0 ; i < 20 ; i++)
+		for(int i = 0 ; i < 71 ; i++)
 		{
 			Block block = (Block) solo.getButton(i);
 			
 			if(!block.isMined() && block.isCovered())
 			{
 				solo.clickOnView(block);
+				solo.sleep(2000);
 				Assert.assertEquals(false, getActivity().isGameOver());
+				break;
 			}
 		}
 	}

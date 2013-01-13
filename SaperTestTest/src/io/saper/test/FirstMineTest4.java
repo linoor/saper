@@ -32,13 +32,16 @@ public class FirstMineTest4 extends ActivityInstrumentationTestCase2<MainActivit
 	{
 		for(int i = 0; i < 10; i++)
 		{
-			int k = 8;
-			solo.clickOnButton(k);
-			Block block = (Block) solo.getButton(k);
-			Assert.assertEquals(false, block.isMined());
-			solo.clickOnImage(0);
-			solo.enterText(0,"test");
+			if(i!=0)
+			{
+				solo.clickOnImage(0);
+			}
+			else solo.enterText(0,"testy");
 			solo.clickOnButton(0);
+			int k = 8;
+			Block block = (Block) solo.getButton(k);
+			solo.clickOnButton(k);
+			Assert.assertEquals(false, block.isMined());
 		}
 	}
 

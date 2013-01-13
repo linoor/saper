@@ -13,12 +13,12 @@ import android.widget.TextView;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-public class ChoiceTest5 extends ActivityInstrumentationTestCase2<MainActivity>
+public class QuestionTest8 extends ActivityInstrumentationTestCase2<MainActivity>
 {
 
 	private Solo solo;
 	
-	public ChoiceTest5()
+	public QuestionTest8()
 	{
 		super("io.saper", MainActivity.class);
 	}
@@ -29,24 +29,31 @@ public class ChoiceTest5 extends ActivityInstrumentationTestCase2<MainActivity>
 		solo = new Solo(getInstrumentation(), getActivity());
 	}
 	
-	public void testChoice()
+	public void testQuestion2()
 	{
+		Random r = new Random();
 		for(int i = 0; i < 10; i++)
 		{
+			//solo.clickOnEditText(0);
 			if(i!=0)
 			{
 				solo.clickOnImage(0);
 			}
-			else solo.enterText(0,"test");
-			solo.clickOnButton(2);
-			TextView licznik = (TextView) solo.getView(R.id.licznik_min);
+			else solo.enterText(0,"testy");
+			solo.clickOnButton(0);
 			int rzedy = getActivity().rzedy();
 			int kolumny = getActivity().kolumny();
-			// pole powinno zostac odkryte
-			String co_licznik=(licznik.getText()).toString();
-			Assert.assertEquals("099", co_licznik);
-			Assert.assertEquals(30, rzedy);
-			Assert.assertEquals(16, kolumny);
+			int nr = 0;
+			Block block = (Block) solo.getButton(nr);
+			solo.clickLongOnView(block);
+			String s = (block.getText()).toString();
+			Assert.assertEquals("F", s);
+			solo.clickLongOnView(block);
+			s = (block.getText()).toString();
+			Assert.assertEquals("?", s);
+			solo.clickLongOnView(block);
+			s = (block.getText()).toString();
+			Assert.assertEquals("", s);
 		}
 	}
 

@@ -43,7 +43,7 @@ public class FirstMineTest extends ActivityInstrumentationTestCase2<MainActivity
 			Block block = (Block) solo.getButton(k);
 			Assert.assertEquals(false, block.isMined());
 			solo.clickOnImage(0);
-			solo.enterText(0,"test");
+			//solo.enterText(0,"test");
 			int butt = rand.nextInt(3);
 			solo.clickOnButton(butt);
 		}

@@ -25,21 +25,25 @@ public class Wiadomosci {
 		String nazwa = nazwaU.getText().toString();
 		if(!nazwa.equals(""))
 		{
-			try{
-				DaneGraczy d = DaneGraczy.getInstance();
-				d.setNazwaGracza(nazwa);
-				if(miny==10)d.setPlansza(Plansza.Min);
-				else if(miny==40)d.setPlansza(Plansza.Med);
-				else d.setPlansza(Plansza.Max);
-				g.ustaw(rzedy,kolumny,miny);
-				g.startNewGame();
+			if( nazwa.length() <= 10 )
+			{
+				try{
+					DaneGraczy d = DaneGraczy.getInstance();
+					d.setNazwaGracza(nazwa);
+					if(miny==10)d.setPlansza(Plansza.Min);
+					else if(miny==40)d.setPlansza(Plansza.Med);
+					else d.setPlansza(Plansza.Max);
+					g.ustaw(rzedy,kolumny,miny);
+					g.startNewGame();
+				}
+				catch(Exception e){}
+				finally{
+					dialog.dismiss();
+				}
 			}
-			catch(Exception e){}
-			finally{
-				dialog.dismiss();
-			}
+			else Wiadomosci.showMessage("Za d³uga nazwa u¿ytkownika (ponad 10 znaków)!!!");
 		}
-		else Wiadomosci.showMessage("Wpisz nazwe u¿ytkownika!!!");
+		else Wiadomosci.showMessage("Wpisz nazwê u¿ytkownika!!!");
 	}
 	/** funkcja pokazuj¹ca okienko w przypadku wygranej
 	 * @version 1.0

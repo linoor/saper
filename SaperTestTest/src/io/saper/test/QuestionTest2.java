@@ -9,15 +9,16 @@ import io.saper.MainActivity;
 import io.saper.R;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
+import android.widget.TextView;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-public class FirstMineTest1 extends ActivityInstrumentationTestCase2<MainActivity>
+public class QuestionTest2 extends ActivityInstrumentationTestCase2<MainActivity>
 {
 
 	private Solo solo;
 	
-	public FirstMineTest1()
+	public QuestionTest2()
 	{
 		super("io.saper", MainActivity.class);
 	}
@@ -28,22 +29,28 @@ public class FirstMineTest1 extends ActivityInstrumentationTestCase2<MainActivit
 		solo = new Solo(getInstrumentation(), getActivity());
 	}
 	
-	public void testFirstMine1()
+	public void testQuestion2()
 	{
+		Random r = new Random();
 		for(int i = 0; i < 10; i++)
 		{
+			//solo.clickOnEditText(0);
 			if(i!=0)
 			{
 				solo.clickOnImage(0);
 			}
-			else solo.enterText(0,"test");
+			else solo.enterText(0,"testy");
 			solo.clickOnButton(0);
-			int k = 0;
-			solo.clickOnButton(k);
-			Block block = (Block) solo.getButton(k);
-			Assert.assertEquals(false, block.isMined());
-			solo.clickOnImage(0);
-			solo.clickOnButton(0);
+			int rzedy = getActivity().rzedy();
+			int kolumny = getActivity().kolumny();
+			int nr = 0;
+			Block block = (Block) solo.getButton(nr);
+			solo.clickLongOnView(block);
+			String s = (block.getText()).toString();
+			Assert.assertEquals("F", s);
+			solo.clickLongOnView(block);
+			s = (block.getText()).toString();
+			Assert.assertEquals("?", s);
 		}
 	}
 

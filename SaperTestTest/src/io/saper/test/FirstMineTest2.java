@@ -30,6 +30,8 @@ public class FirstMineTest2 extends ActivityInstrumentationTestCase2<MainActivit
 	
 	public void testFirstMine2()
 	{
+		solo.enterText(0,"test");
+		solo.clickOnButton(0);
 		for(int i = 0; i < 10; i++)
 		{
 			int k = 80;
@@ -37,7 +39,7 @@ public class FirstMineTest2 extends ActivityInstrumentationTestCase2<MainActivit
 			Block block = (Block) solo.getButton(k);
 			Assert.assertEquals(false, block.isMined());
 			solo.clickOnImage(0);
-			solo.enterText(0,"test");
+			//solo.enterText(0,"test");
 			solo.clickOnButton(0);
 		}
 	}
