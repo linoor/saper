@@ -28,8 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_column="1"
             android:layout_gravity="center"
-            android:background="@null"
-            android:src="@drawable/usmiech" />
+            android:background="@drawable/usmiech" />
 
         <TextView
             android:id="@+id/licznik_min"

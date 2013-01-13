@@ -11,11 +11,22 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 
 public class MineField {
+	private static volatile MineField Instance;
+	private MineField(){}
+	public static MineField getInstance() {
+	    if (Instance == null)
+	    synchronized(MineField.class) {
+	         if (Instance == null) Instance = new MineField();
+	    	}
+	     return Instance;
+	}
 	private Block blocks[][];
 	private int number_of_rows;
 	private int number_of_columns;
 	private int wielkosc_pola = 20;
 	private final int odstep = 3;
+	public static int currentRow;
+	public static int currentColumn;
 	/**funkcja ustalajaca rozmiar planszy
 	 * @param rows liczba rzedow planszy
 	 * @param columns liczba kolumn planszy
@@ -35,44 +46,59 @@ public class MineField {
 	}
 	private void krotkieKlikniecie(int currentRow, int currentColumn)
 	{
-		Gra g = Gra.getInstance();
-		Zegar z = Zegar.getInstance();
-		// jeœli zegar nie rozpocz¹³ odliczania, rozpocznij odliczanie
-		if(!z.isTimerstarted())
-		{
-				z.startTimer();
-				z.setTimerstarted(true);
-		}
-	
-		if(!g.isAreMinesSet())
-		{
-				setMines(currentRow,currentColumn);
-				g.setAreMinesSet(true);
-		}
-	
-		// jeœli pole nie jest zaznaczone flag¹
-		if(!getBlocks()[currentRow][currentColumn].isFlagged() &&
-				!getBlocks()[currentRow][currentColumn].isQuestionMark())
-		{
-			rippleEffect(currentRow, currentColumn);
-		
-			if(getBlocks()[currentRow][currentColumn].isMined())
-			{
-					getBlocks()[currentRow][currentColumn].setMineIcon();
-					g.gameLose();
-			}
-		
-			else if(getBlocks()[currentRow][currentColumn].isCovered())
-			{
-					getBlocks()[currentRow][currentColumn].uncover();
-			}
-		}
-	
-		// sprawdzenie czy gra zosta³a zakoñczona
-		if(g.checkWin())
-		{
-				g.gameWin();
-		}
+		//krotka zmiana miny buzki!
+		MineField.currentColumn = currentColumn;
+		MineField.currentRow = currentRow;
+		Buzka b = Buzka.getInstance();
+    	b.changeImage(R.drawable.zdziwienie);
+    	final Handler handler = new Handler();
+    	handler.postDelayed(new Runnable() {
+    	  @Override
+    	  public void run() {
+    		  Buzka b = Buzka.getInstance();
+    		  Gra g = Gra.getInstance();
+    		  Zegar z = Zegar.getInstance();
+    		  MineField m = MineField.getInstance();
+    		  int currentRow = MineField.currentRow;
+    		  int currentColumn = MineField.currentColumn;
+    		  b.changeImage(R.drawable.usmiech);
+    		  if(!z.isTimerstarted())
+    		  {
+    					z.startTimer();
+    					z.setTimerstarted(true);
+    		  }
+    		
+    		  if(!g.isAreMinesSet())
+    		  {
+    					m.setMines(currentRow,currentColumn);
+    					g.setAreMinesSet(true);
+    		  }
+    		
+    		  // jeœli pole nie jest zaznaczone flag¹
+    		  if(!getBlocks()[currentRow][currentColumn].isFlagged() &&
+    					!getBlocks()[currentRow][currentColumn].isQuestionMark())
+    		  {
+    				rippleEffect(currentRow, currentColumn);
+    			
+    				if(getBlocks()[currentRow][currentColumn].isMined())
+    				{
+    						getBlocks()[currentRow][currentColumn].setMineIcon();
+    						g.gameLose();
+    				}
+    			
+    				else if(getBlocks()[currentRow][currentColumn].isCovered())
+    				{
+    						getBlocks()[currentRow][currentColumn].uncover();
+    				}
+    		  }
+    		
+    		  // sprawdzenie czy gra zosta³a zakoñczona
+    		  if(g.checkWin())
+    		  {
+    					g.gameWin();
+    		  }
+    	  }
+    	}, 300);
 	}
 	private void dlugieKlikniecie(int currentRow, int currentColumn)
 	{

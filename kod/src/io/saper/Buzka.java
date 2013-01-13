@@ -7,7 +7,7 @@ import android.widget.ImageButton;
 
 public class Buzka {
 	private static volatile Buzka Instance;
-	private ImageButton smiley;
+	private ImageButton smiley;//przycisk buzki
 	private Context context;
 	private Buzka(){}
 	public static Buzka getInstance() {
@@ -39,5 +39,12 @@ public class Buzka {
 			}
         	
         });
+	}
+	/**
+	 * do uzyskania ImageButtona
+	 * @return referencja do ImageButtona powiπzanego z buükπ
+	 */
+	public ImageButton getSmiley(){
+		return this.smiley;
 	}
 }

@@ -28,7 +28,7 @@ public class Gra {
 	public void ustaw(int columns, int rows, int mines)
 	{	
 		//tworzy nowe pole minowe
-		m = new MineField();
+		m = MineField.getInstance();
 		m.ustaw(columns, rows);
 		setMinesTotal(mines);
 	}
@@ -55,9 +55,11 @@ public class Gra {
     {
     	LicznikMin l = LicznikMin.getInstance();
     	Zegar z = Zegar.getInstance();
+    	Buzka b = Buzka.getInstance();
         setMinesToFind(getMinesTotal());
         z.setCzas(0);
     	z.update();
+    	b.changeImage(R.drawable.usmiech);
         //poprawne wyswietlanie liczby min
         l.updateMineCount();
         // pokazuje pole minowe
