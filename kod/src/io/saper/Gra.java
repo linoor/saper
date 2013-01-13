@@ -53,6 +53,8 @@ public class Gra {
      */
     public void startNewGame()
     {
+    	Gra g = Gra.getInstance();
+		g.endGame();
     	LicznikMin l = LicznikMin.getInstance();
     	Zegar z = Zegar.getInstance();
     	Buzka b = Buzka.getInstance();

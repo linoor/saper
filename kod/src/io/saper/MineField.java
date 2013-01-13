@@ -50,7 +50,13 @@ public class MineField {
 		MineField.currentColumn = currentColumn;
 		MineField.currentRow = currentRow;
 		Buzka b = Buzka.getInstance();
+		Gra g = Gra.getInstance();
     	b.changeImage(R.drawable.zdziwienie);
+    	if(!g.isAreMinesSet())
+		{
+					setMines(currentRow,currentColumn);
+					g.setAreMinesSet(true);
+		}
     	final Handler handler = new Handler();
     	handler.postDelayed(new Runnable() {
     	  @Override
@@ -68,11 +74,11 @@ public class MineField {
     					z.setTimerstarted(true);
     		  }
     		
-    		  if(!g.isAreMinesSet())
+    		  /*if(!g.isAreMinesSet())
     		  {
     					m.setMines(currentRow,currentColumn);
     					g.setAreMinesSet(true);
-    		  }
+    		  }*/
     		
     		  // jeœli pole nie jest zaznaczone flag¹
     		  if(!getBlocks()[currentRow][currentColumn].isFlagged() &&
@@ -98,7 +104,7 @@ public class MineField {
     					g.gameWin();
     		  }
     	  }
-    	}, 300);
+    	}, 100);
 	}
 	private void dlugieKlikniecie(int currentRow, int currentColumn)
 	{

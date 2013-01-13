@@ -82,7 +82,7 @@ public class Wiadomosci {
 	public static void okienko()
 	{
 		final Dialog dialog = new Dialog(context);
-		dialog.setTitle("Wybor planszy");
+		dialog.setTitle("Wybór planszy");
 		dialog.setContentView(R.layout.custom);
 
 		// set the custom dialog components - text, image and button

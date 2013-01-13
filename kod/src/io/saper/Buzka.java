@@ -32,8 +32,6 @@ public class Buzka {
         {
 			public void onClick(View v)
 			{
-				Gra g = Gra.getInstance();
-				g.endGame();
 				//tworzymy okienko dialogowe!!!
 				Wiadomosci.okienko();
 			}
