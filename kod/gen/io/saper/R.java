@@ -35,12 +35,13 @@ public final class R {
         public static final int image=0x7f08000a;
         public static final int imageButton1=0x7f080003;
         public static final int licznik_min=0x7f080004;
-        public static final int menu_settings=0x7f080011;
-        public static final int ok=0x7f080010;
+        public static final int menu_settings=0x7f080012;
+        public static final int ok=0x7f080011;
         public static final int planszaMax=0x7f08000f;
         public static final int planszaMed=0x7f08000e;
         public static final int planszaMin=0x7f08000d;
         public static final int pole_minowe=0x7f080009;
+        public static final int scrllview=0x7f080010;
         public static final int scroll=0x7f080008;
         public static final int statystyki=0x7f080006;
         public static final int tableRow1=0x7f080001;
