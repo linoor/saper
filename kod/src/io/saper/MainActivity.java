@@ -28,7 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-private TextView zegar, minecount;
+private TextView zegar, minecount,statystyki;
 private ImageButton smiley;
 private TableLayout pole_minowe;
 private ScrollView scroll;
@@ -47,6 +47,7 @@ final Context context = this;//uzywane przy okienkach
         /*tworzenie napisów(liczników)*/
         zegar = (TextView) findViewById(R.id.timer);
         minecount = (TextView) findViewById(R.id.licznik_min);
+        statystyki = (TextView) findViewById(R.id.statystyki);
         /*ustawianie pola minowego*/
         pole_minowe = (TableLayout) findViewById(R.id.pole_minowe);
         //tworzenie referencji do przycisku
@@ -61,8 +62,11 @@ final Context context = this;//uzywane przy okienkach
         z.init(zegar);
         l.init(minecount);
         Wiadomosci.init(context);
-        d.init(context);
+        d.init(context,statystyki);
+        //wczytanie statystyk
         d.wczytajStat();
+        //ustawienie klikniecia na napis ze statystykami
+        d.ustawListenera();
         l.updateMineCount();
         // ustawianie klikniêcia przy buŸce
         b.init(context, smiley);

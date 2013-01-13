@@ -297,7 +297,7 @@ public class MineField {
     		//dynamiczny rozmiar pola
     		int rozmiarPola = wielkosc_pola;
     		int odstepPola = odstep;
-    		if(number_of_rows==16)
+    		/*if(number_of_rows==16)
     		{
     			rozmiarPola=10;
     			odstepPola=2;
@@ -306,7 +306,7 @@ public class MineField {
     		{
     			rozmiarPola=6;
     			odstepPola=1;
-    		}
+    		}*/
     		TableRow table = new TableRow(context);
     		table.setLayoutParams(new TableRow.LayoutParams(
     				(rozmiarPola + 2 * odstepPola) * number_of_columns, 

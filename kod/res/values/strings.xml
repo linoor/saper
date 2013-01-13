@@ -5,7 +5,12 @@
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">Saper</string>
     <string name="wartosc_poczatkowa_licznikow">000</string>
-    <string name="wybierzRozmiar">Wybierz rozmiar planszy oraz liczbe min</string>
+    <string name="statystyki">statystyki</string>
+    <string name="wybierzRozmiar">Wybierz rozmiar planszy oraz liczbę min</string>
+    <string name="min">plansza 9x9, 10 min</string>
+    <string name="med">plansza 16x16, 40 min </string>
+    <string name="max">plansza 16x30, 99 min </string> 
+    <string name="ok">OK</string> 
     <color name="kolor_licznikow">#F5F5F5</color>
 
 </resources>

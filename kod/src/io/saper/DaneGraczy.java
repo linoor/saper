@@ -12,6 +12,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import android.content.Context;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 class Czas implements Serializable
 {
@@ -87,6 +90,7 @@ class Dane implements Serializable{
 public class DaneGraczy {
 	private static volatile DaneGraczy Instance;
 	private DaneGraczy(){}
+	private TextView stat;
 	private Context context;
 	private String nazwaGracza;
 	private Plansza plansza;
@@ -174,9 +178,48 @@ public class DaneGraczy {
         }
 	}
 	
-	public void init(Context context)
+	private String najlepszeNaPlanszy(Plansza p)
+	{
+		String Imie[]= {"-","-","-"};
+		int Czasy[] = {Integer.MAX_VALUE,Integer.MAX_VALUE,Integer.MAX_VALUE};
+		for (Map.Entry<String, Dane> entry : statystyki.entrySet())
+		{ 
+			String imie = entry.getKey();
+			Dane d = entry.getValue();
+			String czas = d.getCzas(p);
+			if(!czas.equals("-"))
+			{
+				int czasInt = Integer.parseInt(czas);
+				if(czasInt < Czasy[0])
+				{
+					Czasy[0] = czasInt;
+					Imie[0] = imie;
+				}
+				else if(czasInt < Czasy[1])
+				{
+					Czasy[1] = czasInt;
+					Imie[1] = imie;
+				}
+				else if(czasInt < Czasy[2])
+				{
+					Czasy[2] = czasInt;
+					Imie[2] = imie;
+				}
+			}
+		}
+		String wynik="";
+		for(int i=0;i<3;i++)
+		{
+			wynik += (i+1)+") "+Imie[i]+" : ";
+			if(!Imie[i].equals("-")) wynik += Czasy[i]+" s\n";
+			else wynik += "- s\n";
+		}
+		return wynik;
+	}
+	public void init(Context context, TextView stat)
 	{
 		this.context = context;
+		this.stat = stat;
 	}
 	public void setNazwaGracza(String nazwa)
 	{
@@ -247,5 +290,39 @@ public class DaneGraczy {
 	public void wczytajStat()
 	{
 		otworzStatystyki();
+	}
+	
+	public void wypiszStat()
+	{
+		String s = "Twoje najlepsze wyniki:\nPlansza 9x9: ";
+		Dane d = statystyki.get(nazwaGracza);
+		if(d == null)
+		{
+			s+="-\nPlansza 16x16: -\nPlansza 16x30: -\n\n";
+		}
+		else
+		{
+			String min = d.getCzas(Plansza.Min);
+			String med = d.getCzas(Plansza.Med);
+			String max = d.getCzas(Plansza.Max);
+			s+=min+" s\nPlansza med: "+med+" s\nPlansza max: "+max+" s\n";
+		}
+		s+="Najlepsze wyniki na poszczegolnych planszach\n\n";
+		s+="Na 9x9:\n"+najlepszeNaPlanszy(Plansza.Min);
+		s+="Na 16x16:\n"+najlepszeNaPlanszy(Plansza.Med);
+		s+="Na 16x30:\n"+najlepszeNaPlanszy(Plansza.Max);
+		Wiadomosci.okienkoStat(s);
+	}
+	public void ustawListenera()
+	{
+		stat.setOnClickListener(new OnClickListener()
+        {
+			public void onClick(View v)
+			{
+				//tworzymy okienko dialogowe!!!
+				wypiszStat();
+			}
+        	
+        });
 	}
 }

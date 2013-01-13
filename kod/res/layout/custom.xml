@@ -35,7 +35,7 @@
          android:layout_centerHorizontal="true"
          android:layout_marginRight="30dp"
          android:layout_marginTop="50dp"
-         android:text="plansza 9x9, 10 min " />
+         android:text="@string/min" />
  	
      <Button
          android:id="@+id/planszaMed"
@@ -45,7 +45,7 @@
          android:layout_centerHorizontal="true"
          android:layout_marginRight="30dp"
          android:layout_marginTop="95dp"
-         android:text="plansza 16x16, 40 min " />
+         android:text="@string/med" />
      	<Button
          android:id="@+id/planszaMax"
          android:layout_width="200px"
@@ -54,6 +54,6 @@
          android:layout_centerHorizontal="true"
          android:layout_marginRight="30dp"
          android:layout_marginTop="140dp"
-         android:text="plansza 16x30, 99 min " />
+         android:text="@string/max" />
  
 </RelativeLayout>

@@ -46,7 +46,7 @@ public class Wiadomosci {
 	 */
 	public static void showDialogBox(String message, int seconds, boolean win)
 	{
-		CharSequence text = message + "\nCzas gry: " + String.valueOf(seconds) + " sekund";
+		CharSequence text = message + "\nCzas gry: " + String.valueOf(seconds) + " s";
 		int duration = Toast.LENGTH_LONG;
 		
 		Toast toast = Toast.makeText(context, text, duration);
@@ -110,6 +110,23 @@ public class Wiadomosci {
 		dialogButton3.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				zacznij(dialog,nazwaU,16,30,99);
+			}
+		});
+		dialog.show();
+	}
+	public static void okienkoStat(String wiadomosc)
+	{
+		final Dialog dialog = new Dialog(context);
+		dialog.setTitle("Statystyki");
+		dialog.setContentView(R.layout.statystyki);
+
+		// set the custom dialog components - text, image and button
+		TextView text = (TextView) dialog.findViewById(R.id.text);
+		text.setText(wiadomosc);
+		Button dialogButton1 = (Button) dialog.findViewById(R.id.ok);
+		dialogButton1.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				dialog.dismiss();
 			}
 		});
 		dialog.show();
