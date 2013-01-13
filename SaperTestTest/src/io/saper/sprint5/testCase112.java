@@ -1,4 +1,4 @@
-package io.saper.sprint4;
+package io.saper.sprint5;
 
 import java.util.Random;
 
@@ -13,12 +13,12 @@ import io.saper.R;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.ImageButton;
 
-public class testCase71 extends ActivityInstrumentationTestCase2<MainActivity>
+public class testCase112 extends ActivityInstrumentationTestCase2<MainActivity>
 {
 
 	private Solo solo;
 	
-	public testCase71()
+	public testCase112()
 	{
 		super("io.saper", MainActivity.class);
 	}
@@ -33,29 +33,17 @@ public class testCase71 extends ActivityInstrumentationTestCase2<MainActivity>
 	{
 		solo.enterText(0, "jakasnazwa");
 		solo.clickOnButton(0);
-		Random rand = new Random(36);
-		solo.clickOnButton(rand.nextInt(81));
+		solo.clickOnButton(0);
 		
 		
-		for(int i = 0; i < 3; i++)
+		for(int i = 0 ; i < 20 ; i++)
 		{
-			int random = rand.nextInt(81);
-			Block block = (Block) solo.getButton(random);
+			Block block = (Block) solo.getButton(i);
 			
-			if(block.isMined())
+			if(!block.isMined() && block.isCovered())
 			{
-				i--;
-				continue;
-			}
-			else
-			{
-				for(int j = 0 ; j < 3; j++)
-				{
-					for(int k = 0; k < 3; k++)
-					{
-						
-					}
-				}
+				solo.clickOnView(block);
+				Assert.assertEquals(false, getActivity().isGameOver());
 			}
 		}
 	}
