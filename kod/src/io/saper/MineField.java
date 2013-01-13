@@ -51,7 +51,8 @@ public class MineField {
 		}
 	
 		// jeœli pole nie jest zaznaczone flag¹
-		if(!getBlocks()[currentRow][currentColumn].isFlagged())
+		if(!getBlocks()[currentRow][currentColumn].isFlagged() &&
+				!getBlocks()[currentRow][currentColumn].isQuestionMark())
 		{
 			rippleEffect(currentRow, currentColumn);
 		
@@ -77,15 +78,15 @@ public class MineField {
 	{
 		Gra g = Gra.getInstance();
 		LicznikMin l = LicznikMin.getInstance();
-		if(!getBlocks()[currentRow][currentColumn].isFlagged() && g.getMinesToFind() >= 1 &&
-			getBlocks()[currentRow][currentColumn].isCovered())
+		if(!getBlocks()[currentRow][currentColumn].isFlagged() &&
+				g.getMinesToFind() >= 1 &&
+			getBlocks()[currentRow][currentColumn].isCovered() &&
+			!getBlocks()[currentRow][currentColumn].isQuestionMark())
 		{
 			// zmiejszamy liczbê min do znalezienia
 			g.setMinesToFind(g.getMinesToFind() - 1);
 			// ustawiamy ikonkê flagi
 			getBlocks()[currentRow][currentColumn].setFlagIcon(true);
-			// ustawiamy znacznik
-			getBlocks()[currentRow][currentColumn].setFlagged(true);
 			// update minecount
 			l.updateMineCount();
 		
@@ -94,12 +95,17 @@ public class MineField {
 		{
 			// zwiêkszamy liczbê min do znalezienia
 			g.setMinesToFind(g.getMinesToFind() + 1);
-			// zmieniamy ikonke
+			// zmieniamy ikonke na pytajnik
 			getBlocks()[currentRow][currentColumn].setFlagIcon(false);
-			// ustawiamy znacznik
-			getBlocks()[currentRow][currentColumn].setFlagged(false);
+			// ustawiamy znacznik pytajnika
+			getBlocks()[currentRow][currentColumn].setQuestionMarkIcon(true);
 			// update mineCount
 			l.updateMineCount();
+		}
+		else if(getBlocks()[currentRow][currentColumn].isQuestionMark())
+		{
+			// zmieniamy ikonke
+			getBlocks()[currentRow][currentColumn].setQuestionMarkIcon(false);
 		}
 		if(g.getMinesToFind() == 0)
 		{

@@ -10,6 +10,7 @@ public class Block extends Button
 	private boolean isCovered;// pokazuje czy pole zosta³o odkryte
 	/** pokazuje czy pole zosta³o zakryte flag¹ */
 	private boolean isFlagged;
+	private boolean isQuestionMark;
 	private boolean isMined; // pokazuje czy blok posiada pod spodem mine
 	private int numberOfMinesSurrounding; // pokazuje liczbe min w poblizu pola
 	
@@ -113,10 +114,12 @@ public class Block extends Button
 		{
 			setText("F");
 			setTextColor(Color.CYAN);
+			isFlagged = true;
 		}
 		else
 		{
 			setText("");
+			isFlagged = false;
 		}
 		
 	}
@@ -125,5 +128,30 @@ public class Block extends Button
 	{
 		setText("M");
 		setTextColor(Color.RED);
+	}
+	/** sprawdza czy pole jest zakryte pytajnikiem */
+	public boolean isQuestionMark()
+	{
+		return isQuestionMark;
+	}
+	/** ustawia pytajnik na polu */
+	public void setQuestionMark(boolean b)
+	{
+		isQuestionMark = b;
+	}
+	/** ustawia ikonkê pytajnika */
+	public void setQuestionMarkIcon(boolean b)
+	{
+		if(b)
+		{
+			setText("?");
+			isQuestionMark = true;
+		}
+		else
+		{
+			setText("");
+			isQuestionMark = false;
+		}
+		
 	}
 }
