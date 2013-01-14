@@ -29,6 +29,7 @@ public class WinGameTest extends ActivityInstrumentationTestCase2<MainActivity>
 	{
 		solo.enterText(0,"test");
 		solo.clickOnButton(0);
+		solo.sleep(1000);
 		Block block = (Block) solo.getButton(0);
 		solo.clickOnView(block);
 		for(int i = 1; i < 9*9; i++)
@@ -39,6 +40,7 @@ public class WinGameTest extends ActivityInstrumentationTestCase2<MainActivity>
 				solo.clickOnView(block);
 			}
 		}
+		solo.sleep(2000);
 		Assert.assertTrue(getActivity().checkWin());
 	}
 
