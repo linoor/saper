@@ -37,6 +37,7 @@ public class MineFieldTest extends ActivityInstrumentationTestCase2<MainActivity
 	{
 		solo.enterText(0, "jakasnazwa");
 		solo.clickOnButton(0);
+		solo.sleep(2000);
 		MineField g = MineField.getInstance();
 		g.setMines(7, 4);
 		//sprawdze, czy na tym polu nie ma miny!
