@@ -277,7 +277,7 @@ public class DaneGraczy {
 	{
 		Dane d = statystyki.get(nazwaGracza);
 		String wiadomosc="";
-		if(d==null)wiadomosc="Brak twojego najlepszego wyniku";
+		if(d==null)wiadomosc="Brak twojego najlepszego wyniku na tej planszy";
 		else
 		{
 			String czas = d.getCzas(plansza);
