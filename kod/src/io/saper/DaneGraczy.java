@@ -8,7 +8,9 @@ import java.io.InvalidClassException;
 import java.io.NotSerializableException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OptionalDataException;
 import java.io.Serializable;
+import java.io.StreamCorruptedException;
 import java.util.HashMap;
 import java.util.Map;
 import android.content.Context;
@@ -85,6 +87,14 @@ class Dane implements Serializable{
 	{
 		czasy.setCzas(p,nowy);
 	}
+	public int getIleRozegranych()
+	{
+		return ileRozegranych;
+	}
+	public int getIleWygranych()
+	{
+		return ileWygranych;
+	}
 }
 
 public class DaneGraczy {
@@ -152,6 +162,7 @@ public class DaneGraczy {
 		catch(FileNotFoundException e)
 		{
 			statystyki = new HashMap<String,Dane>();
+			if(statystyki == null)Wiadomosci.showMessage("stat null");
 			czyOtwierac = false;
 		}
 		catch(Exception e)
@@ -167,9 +178,30 @@ public class DaneGraczy {
         		statystyki =  readObject;
         	}
         }
+        catch(ClassNotFoundException e)
+        {	
+        	Wiadomosci.showMessage("klasa nie znaleziona przy wczytywaniu");
+        	statystyki = new HashMap<String,Dane>();
+        }
+        catch(InvalidClassException e)
+        {	
+        	Wiadomosci.showMessage("Cos zlego z klasa statystyk przy wczytywaniu");
+        	statystyki = new HashMap<String,Dane>();
+        }
+        catch(StreamCorruptedException e)
+        {	
+        	Wiadomosci.showMessage("Control information in the stream is inconsistent");
+        	statystyki = new HashMap<String,Dane>();
+        }
+        catch(OptionalDataException e)
+        {	
+        	Wiadomosci.showMessage("Primitive data was found in the stream instead of objects");
+        	statystyki = new HashMap<String,Dane>();
+        }
         catch(Exception e)
         {
         	Wiadomosci.showMessage("wyjatek przy wczytywaniu statystyk");
+        	statystyki = new HashMap<String,Dane>();
         }
         finally {
         	try{
@@ -294,10 +326,12 @@ public class DaneGraczy {
 	
 	public void wypiszStat()
 	{
-		String s = "Twoje najlepsze wyniki:\nPlansza 9x9: ";
+		String s ="";
 		Dane d = statystyki.get(nazwaGracza);
 		if(d == null)
 		{
+			s+="Statystyka wygranych gier: 0/0\n";
+			s+= "Twoje najlepsze wyniki:\nPlansza 9x9: ";
 			s+="-\nPlansza 16x16: -\nPlansza 16x30: -\n\n";
 		}
 		else
@@ -305,6 +339,10 @@ public class DaneGraczy {
 			String min = d.getCzas(Plansza.Min);
 			String med = d.getCzas(Plansza.Med);
 			String max = d.getCzas(Plansza.Max);
+			int ileGier = d.getIleRozegranych();
+			int ileWyg = d.getIleWygranych();
+			s+="Statystyka wygranych gier: "+ileWyg+"/"+ileGier+"\n";
+			s+= "Twoje najlepsze wyniki:\nPlansza 9x9: ";
 			s+=min+" s\nPlansza med: "+med+" s\nPlansza max: "+max+" s\n";
 		}
 		s+="Najlepsze wyniki na poszczegolnych planszach\n\n";
