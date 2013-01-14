@@ -374,4 +374,10 @@ public class DaneGraczy {
 		if(d == null)return 0;
 		return d.getIleRozegranych();
 	}
+	public boolean czyGraczWStat(String imie)
+	{
+		Dane d = statystyki.get(nazwaGracza);
+		if(d == null)return false;
+		return true;
+	}
 }
