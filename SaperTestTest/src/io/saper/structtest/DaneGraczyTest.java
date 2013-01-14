@@ -35,7 +35,7 @@ public class DaneGraczyTest extends ActivityInstrumentationTestCase2<MainActivit
 		solo.enterText(0, "jakasnazwa");
 		solo.clickOnButton(0);
 		DaneGraczy d = DaneGraczy.getInstance();
-		String nazwa = "nowGr";
+		String nazwa = "nowyyyT";
 		String czas = "89";
 		d.setNazwaGracza(nazwa);
 		assertEquals(nazwa, d.getNazwaGracza());
@@ -45,11 +45,17 @@ public class DaneGraczyTest extends ActivityInstrumentationTestCase2<MainActivit
 		assertEquals(Plansza.Med, d.getPlansza());
 		d.setPlansza(Plansza.Min);
 		assertEquals(Plansza.Min, d.getPlansza());
+		assertEquals(0,d.getIleRozegranych());
+		assertEquals(0,d.getIleWygranych());
 		d.update(czas, false);
 		assertEquals("Brak twojego najlepszego wyniku na tej planszy",
 				d.najlepszyWynik());
+		assertEquals(1,d.getIleRozegranych());
+		assertEquals(0,d.getIleWygranych());
 		d.update(czas, true);
 		assertEquals("Twój najlepszy wynik na tej planszy to "+czas+" s",
 				d.najlepszyWynik());
+		assertEquals(2,d.getIleRozegranych());
+		assertEquals(1,d.getIleWygranych());
 	}
 }

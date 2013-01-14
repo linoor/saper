@@ -298,7 +298,6 @@ public class DaneGraczy {
 						Integer.parseInt(poprzedniCzas) > Integer.parseInt(czas))
 				{
 					d.setCzas(plansza,czas);
-					d.zwiekszLiczbeWygranychGier();
 				}
 			}
 		}
@@ -362,5 +361,17 @@ public class DaneGraczy {
 			}
         	
         });
+	}
+	public int getIleWygranych()
+	{
+		Dane d = statystyki.get(nazwaGracza);
+		if(d == null)return 0;
+		return d.getIleWygranych();
+	}
+	public int getIleRozegranych()
+	{
+		Dane d = statystyki.get(nazwaGracza);
+		if(d == null)return 0;
+		return d.getIleRozegranych();
 	}
 }
