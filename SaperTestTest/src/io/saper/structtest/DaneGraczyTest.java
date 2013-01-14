@@ -30,12 +30,47 @@ public class DaneGraczyTest extends ActivityInstrumentationTestCase2<MainActivit
 		solo = new Solo(getInstrumentation(), getActivity());
 	}
 	
+	@Override
+	   public void tearDown() throws Exception {
+	        solo.finishOpenedActivities();
+	  }
+	
 	public void testDaneGraczy()
 	{
-		solo.enterText(0, "jakasnazwa");
-		solo.clickOnButton(0);
 		DaneGraczy d = DaneGraczy.getInstance();
-		String nazwa = "aaaaaaa";
+		if(d.getNazwaGracza()=="")solo.enterText(0, "jakasnazwa");
+		solo.clickOnButton(0);
+		String nazwa = "AAAAAAAAAB";
+		/*int poz = 9;//od tej pozycji w stringu beda zmiany
+		while(d.czyGraczWStat(nazwa))
+		{
+			//generowanie ciagu znakow
+			char znak = nazwa.charAt(poz);
+			if( znak < 'z')
+			{
+				nazwa=nazwa.substring(0, poz);
+				znak++;
+				nazwa+=znak;
+			}
+			else
+			{
+				while(znak == 'z')
+				{
+					poz--;
+					znak = nazwa.charAt(poz);
+				}
+				znak++;
+				nazwa=nazwa.substring(0, poz);
+				nazwa += znak;
+				poz++;
+				while(poz<10)
+				{
+					nazwa+='A';
+					poz++;
+				}
+				poz = 9;
+			}
+		}*/
 		String czas = "89";
 		d.setNazwaGracza(nazwa);
 		assertEquals(nazwa, d.getNazwaGracza());

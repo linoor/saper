@@ -7,6 +7,7 @@ import junit.framework.Assert;
 import com.jayway.android.robotium.solo.Solo;
 
 import io.saper.Block;
+import io.saper.DaneGraczy;
 import io.saper.MainActivity;
 import io.saper.R;
 //import io.saper.R;
@@ -28,10 +29,15 @@ public class BlockTest extends ActivityInstrumentationTestCase2<MainActivity>
 		super.setUp();
 		solo = new Solo(getInstrumentation(), getActivity());
 	}
+	@Override
+	   public void tearDown() throws Exception {
+	        solo.finishOpenedActivities();
+	  }
 	
 	public void testBlock()
 	{
-		solo.enterText(0, "jakasnazwa");
+		DaneGraczy d = DaneGraczy.getInstance();
+		if(d.getNazwaGracza()=="")solo.enterText(0, "jakasnazwa");
 		solo.clickOnButton(0);
 		Random r = new Random();
 		Block b = null;

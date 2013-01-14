@@ -1,6 +1,7 @@
 package io.saper.test;
 
 import io.saper.Block;
+import io.saper.DaneGraczy;
 import io.saper.MainActivity;
 import android.test.ActivityInstrumentationTestCase2;
 
@@ -27,7 +28,8 @@ public class WinGameTest extends ActivityInstrumentationTestCase2<MainActivity>
 	
 	public void testGameWin()
 	{
-		solo.enterText(0,"test");
+		DaneGraczy d = DaneGraczy.getInstance();
+		if(d.getNazwaGracza()=="")solo.enterText(0, "jakasnazwa");
 		solo.clickOnButton(0);
 		solo.sleep(1000);
 		Block block = (Block) solo.getButton(0);

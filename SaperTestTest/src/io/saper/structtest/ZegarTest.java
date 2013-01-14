@@ -34,9 +34,15 @@ public class ZegarTest extends ActivityInstrumentationTestCase2<MainActivity>
 		solo = new Solo(getInstrumentation(), getActivity());
 	}
 	
+	@Override
+	   public void tearDown() throws Exception {
+	        solo.finishOpenedActivities();
+	  }
+	
 	public void testMineField()
 	{
-		solo.enterText(0, "jakasnazwa");
+		DaneGraczy d = DaneGraczy.getInstance();
+		if(d.getNazwaGracza()=="")solo.enterText(0, "jakasnazwa");
 		solo.clickOnButton(0);
 		Zegar z = Zegar.getInstance();
 		z.setTimerstarted(true);

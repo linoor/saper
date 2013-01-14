@@ -33,9 +33,15 @@ public class MineFieldTest extends ActivityInstrumentationTestCase2<MainActivity
 		solo = new Solo(getInstrumentation(), getActivity());
 	}
 	
+	@Override
+	   public void tearDown() throws Exception {
+	        solo.finishOpenedActivities();
+	  }
+	
 	public void testMineField()
 	{
-		solo.enterText(0, "jakasnazwa");
+		DaneGraczy d = DaneGraczy.getInstance();
+		if(d.getNazwaGracza()=="")solo.enterText(0, "jakasnazwa");
 		solo.clickOnButton(0);
 		solo.sleep(2000);
 		MineField g = MineField.getInstance();
