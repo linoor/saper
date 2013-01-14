@@ -35,7 +35,7 @@ public class WinGameTest extends ActivityInstrumentationTestCase2<MainActivity>
 		for(int i = 1; i < 9*9; i++)
 		{
 			block = (Block) solo.getButton(i);
-			if(!block.isMined())
+			if(!block.isMined()&&block.isCovered())
 			{
 				solo.clickOnView(block);
 			}
