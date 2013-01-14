@@ -81,11 +81,11 @@ public class Gra {
     	{
     		for(int j = 1; j < m.kolumny() + 1; j++)
     		{
-    			if(m.getBlocks()[i][j].isFlagged())
+    			/*if(m.getBlocks()[i][j].isFlagged())
     			{
     				continue;
     			}
-    			else if(!m.getBlocks()[i][j].isMined() && m.getBlocks()[i][j].isCovered())
+    			else */if(!m.getBlocks()[i][j].isMined() && m.getBlocks()[i][j].isCovered())
     			{
     				return false;
     			}
