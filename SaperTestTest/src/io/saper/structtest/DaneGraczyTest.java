@@ -35,7 +35,7 @@ public class DaneGraczyTest extends ActivityInstrumentationTestCase2<MainActivit
 		solo.enterText(0, "jakasnazwa");
 		solo.clickOnButton(0);
 		DaneGraczy d = DaneGraczy.getInstance();
-		String nazwa = "nowyyyT";
+		String nazwa = "aaaaaaa";
 		String czas = "89";
 		d.setNazwaGracza(nazwa);
 		assertEquals(nazwa, d.getNazwaGracza());
