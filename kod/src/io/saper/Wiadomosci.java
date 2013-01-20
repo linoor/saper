@@ -60,6 +60,16 @@ public class Wiadomosci {
 			}
         	
         });
+		oprojekcie.setOnClickListener(new OnClickListener()
+        {
+			public void onClick(View v)
+			{
+				String wiadomosc = "Projekt powstal w ramach kursu in¿ynieria oprogramowania."
+						+"\nlinoor + cosmia + moren126";
+				Wiadomosci.showMessage(wiadomosc);
+			}
+        	
+        });
 	}
 	/** funkcja pokazuj¹ca okienko w przypadku wygranej
 	 * @version 1.0
