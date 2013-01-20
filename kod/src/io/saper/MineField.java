@@ -266,16 +266,16 @@ public class MineField {
 						wiersz > 0 && kolumna > 0)
 				{
 					// t³umienie
-					Handler handler = new Handler();
-					handler.postDelayed(new Runnable()
-					{
-
-						public void run()
-						{
+//					Handler handler = new Handler();
+//					handler.postDelayed(new Runnable()
+//					{
+//
+//						public void run()
+//						{
 							rippleEffect(wiersz, kolumna);
-						}
-						
-					}, rand.nextInt(40));
+//						}
+//						
+//					}, rand.nextInt(40));
 				}
 			}
 		}

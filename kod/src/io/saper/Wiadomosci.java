@@ -77,7 +77,7 @@ public class Wiadomosci {
 	public static void showDialogBox(String message, int seconds, boolean win)
 	{
 		CharSequence text = message + "\nCzas gry: " + String.valueOf(seconds) + " s";
-		int duration = Toast.LENGTH_LONG;
+		int duration = Toast.LENGTH_SHORT;
 		
 		Toast toast = Toast.makeText(context, text, duration);
 		toast.setGravity(Gravity.CENTER, 0, 0);
@@ -103,7 +103,7 @@ public class Wiadomosci {
 	public static void showMessage(String message)
 	{
 		CharSequence text = message;
-		int duration = Toast.LENGTH_LONG;
+		int duration = Toast.LENGTH_SHORT;
 		
 		Toast toast = Toast.makeText(context, text, duration);
 		toast.setGravity(Gravity.CENTER, 0, 0);
