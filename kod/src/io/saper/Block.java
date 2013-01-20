@@ -23,7 +23,7 @@ public class Block extends Button
 		numberOfMinesSurrounding = 0;
 		
 		// ustawianie t³a pola
-		this.setBackgroundResource(R.drawable.orange);
+		this.setBackgroundResource(R.drawable.tlo_pola);
 	}
 	/** sprawdza czy pole jest odkryte */
 	public boolean isCovered()
@@ -38,7 +38,7 @@ public class Block extends Button
 			return;
 		}
 		isCovered = false;
-		this.setBackgroundResource(R.drawable.red);
+		setBackgroundResource(R.drawable.tlo_pola_odkrytego);
 		ustawLiczby();
 	}
 	/**funkcja ustawiajaca numerki na polach
@@ -46,7 +46,7 @@ public class Block extends Button
 	 */
 	public void ustawLiczby()
 	{
-		
+		this.setTextSize(8);
 		final int liczbaMin = getMinesSurrounding();
 		setText(String.valueOf(liczbaMin));
 		if(liczbaMin == 0)
@@ -57,16 +57,16 @@ public class Block extends Button
 		switch(liczbaMin)
 		{
 		case 1:
-			setTextColor(Color.WHITE);
+			setTextColor(Color.GRAY);
 			break;
 		case 2:
-			setTextColor(Color.LTGRAY);
-			break;
-		case 3:
 			setTextColor(Color.BLUE);
 			break;
+		case 3:
+			setTextColor(Color.MAGENTA);
+			break;
 		case 4:
-			setTextColor(Color.GREEN);
+			setTextColor(Color.RED);
 			break;
 		case 5:
 		case 6:
@@ -112,8 +112,7 @@ public class Block extends Button
 	{
 		if(b)
 		{
-			setText("F");
-			setTextColor(Color.CYAN);
+			setBackgroundResource(R.drawable.pole_flaga);
 			isFlagged = true;
 		}
 		else
@@ -126,8 +125,7 @@ public class Block extends Button
 	/** Ustawia ikonkê miny */
 	public void setMineIcon()
 	{
-		setText("M");
-		setTextColor(Color.RED);
+		setBackgroundResource(R.drawable.pole_odkryte_bomba);
 	}
 	/** sprawdza czy pole jest zakryte pytajnikiem */
 	public boolean isQuestionMark()
@@ -144,6 +142,7 @@ public class Block extends Button
 	{
 		if(b)
 		{
+			setBackgroundResource(R.drawable.tlo_pola);
 			setText("?");
 			isQuestionMark = true;
 		}

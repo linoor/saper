@@ -126,15 +126,14 @@ public class Wiadomosci {
 		dialog.setTitle("Statystyki");
 		dialog.setContentView(R.layout.statystyki);
 
-		// set the custom dialog components - text, image and button
-		TextView text = (TextView) dialog.findViewById(R.id.text);
-		text.setText(wiadomosc);
 		Button dialogButton1 = (Button) dialog.findViewById(R.id.ok);
 		dialogButton1.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				dialog.dismiss();
 			}
 		});
+		TextView text = (TextView) dialog.findViewById(R.id.text);
+		text.setText(wiadomosc);
 		dialog.show();
 	}
 }

@@ -224,11 +224,17 @@ public class DaneGraczy {
 				int czasInt = Integer.parseInt(czas);
 				if(czasInt < Czasy[0])
 				{
+					Czasy[2] = Czasy[1];
+					Czasy[1] = Czasy[0];
+					Imie[2] = Imie[1];
+					Imie[1] = Imie[0];
 					Czasy[0] = czasInt;
 					Imie[0] = imie;
 				}
 				else if(czasInt < Czasy[1])
 				{
+					Czasy[2] = Czasy[1];
+					Imie[2] = Imie[1];
 					Czasy[1] = czasInt;
 					Imie[1] = imie;
 				}
@@ -344,10 +350,10 @@ public class DaneGraczy {
 			s+= "Twoje najlepsze wyniki:\nPlansza 9x9: ";
 			s+=min+" s\nPlansza med: "+med+" s\nPlansza max: "+max+" s\n";
 		}
-		s+="Najlepsze wyniki na poszczegolnych planszach\n\n";
+		s+="Najlepsze wyniki na poszczególnych planszach\n\n";
 		s+="Na 9x9:\n"+najlepszeNaPlanszy(Plansza.Min);
-		s+="Na 16x16:\n"+najlepszeNaPlanszy(Plansza.Med);
-		s+="Na 16x30:\n"+najlepszeNaPlanszy(Plansza.Max);
+		s+="\nNa 16x16:\n"+najlepszeNaPlanszy(Plansza.Med);
+		s+="\nNa 16x30:\n"+najlepszeNaPlanszy(Plansza.Max);
 		Wiadomosci.okienkoStat(s);
 	}
 	public void ustawListenera()
