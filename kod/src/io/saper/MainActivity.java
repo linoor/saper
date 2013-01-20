@@ -29,7 +29,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 private TextView zegar, minecount;
-private ImageButton smiley, statystyki;
+private ImageButton smiley, statystyki, jakgrac, oprojekcie;
 private TableLayout pole_minowe;
 private ScrollView scroll;
 final Context context = this;//uzywane przy okienkach
@@ -48,6 +48,8 @@ final Context context = this;//uzywane przy okienkach
         zegar = (TextView) findViewById(R.id.timer);
         minecount = (TextView) findViewById(R.id.licznik_min);
         statystyki = (ImageButton) findViewById(R.id.statystyki);
+        jakgrac = (ImageButton) findViewById(R.id.jakgrac);
+        oprojekcie = (ImageButton) findViewById(R.id.oprojekcie);
         /*ustawianie pola minowego*/
         pole_minowe = (TableLayout) findViewById(R.id.pole_minowe);
         //tworzenie referencji do przycisku
@@ -61,7 +63,7 @@ final Context context = this;//uzywane przy okienkach
         g.setMinesTotal(10);
         z.init(zegar);
         l.init(minecount);
-        Wiadomosci.init(context);
+        Wiadomosci.init(context,jakgrac,oprojekcie);
         d.init(context,statystyki);
         //wczytanie statystyk
         d.wczytajStat();
@@ -71,6 +73,7 @@ final Context context = this;//uzywane przy okienkach
         // ustawianie klikniêcia przy buŸce
         b.init(context, smiley);
         b.ustawListenera();
+        Wiadomosci.ustawListenery();
                
         // zapytanie o now¹ grê
         Wiadomosci.okienko();

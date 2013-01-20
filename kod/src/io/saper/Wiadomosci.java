@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,9 +16,12 @@ import android.widget.Toast;
 public class Wiadomosci {
 	//okienka i toasty
 	static Context context;
-	public static void init(Context context)
+	static ImageButton jakgrac, oprojekcie;
+	public static void init(Context context, ImageButton jakgrac, ImageButton oprojekcie)
 	{
 		Wiadomosci.context = context;
+		Wiadomosci.jakgrac = jakgrac;
+		Wiadomosci.oprojekcie = oprojekcie;
 	}
 	private static void zacznij(Dialog dialog, EditText nazwaU, int rzedy, int kolumny, int miny)
 	{
@@ -44,6 +48,18 @@ public class Wiadomosci {
 			else Wiadomosci.showMessage("Za d³uga nazwa u¿ytkownika (ponad 10 znaków)!!!");
 		}
 		else Wiadomosci.showMessage("Wpisz nazwê u¿ytkownika!!!");
+	}
+	public static void ustawListenery()
+	{
+		jakgrac.setOnClickListener(new OnClickListener()
+        {
+			public void onClick(View v)
+			{
+				//tworzymy okienko dialogowe!!!
+				Wiadomosci.okienkoGra();
+			}
+        	
+        });
 	}
 	/** funkcja pokazuj¹ca okienko w przypadku wygranej
 	 * @version 1.0
@@ -126,6 +142,26 @@ public class Wiadomosci {
 		dialog.setTitle("Statystyki");
 		dialog.setContentView(R.layout.statystyki);
 
+		Button dialogButton1 = (Button) dialog.findViewById(R.id.ok);
+		dialogButton1.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				dialog.dismiss();
+			}
+		});
+		TextView text = (TextView) dialog.findViewById(R.id.text);
+		text.setText(wiadomosc);
+		dialog.show();
+	}
+	public static void okienkoGra()
+	{
+		final Dialog dialog = new Dialog(context);
+		dialog.setTitle("Statystyki");
+		dialog.setContentView(R.layout.statystyki);
+		String wiadomosc="\nGra polega na tym, by odkryc wszystkie niezaminowane pola.\n"
+				+"Mo¿na sobie pomagaæ, stawiaj¹c na polu symbol flagi - nale¿y u¿yæ d³ugiego klikniêcia."
+				+"\nKolejne d³ugie klikniêcie postawi na tym polu pytajnik, a nastêpne je wyczyœci."
+				+"\nKrótkie klikniêcia ods³aniaj¹ pole.\n"
+				+"\n Now¹ grê mo¿na rozpocz¹æ klikaj¹c buŸkê.";
 		Button dialogButton1 = (Button) dialog.findViewById(R.id.ok);
 		dialogButton1.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
