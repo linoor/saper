@@ -26,16 +26,19 @@ public final class R {
         public static final int pole_flaga=0x7f020009;
         public static final int pole_odkryte_bomba=0x7f02000a;
         public static final int pole_odkryte_flaga=0x7f02000b;
-        public static final int pomaranczowe=0x7f02000c;
-        public static final int przestraszenie=0x7f02000d;
-        public static final int red=0x7f02000e;
-        public static final int smiech=0x7f02000f;
-        public static final int szara=0x7f020010;
-        public static final int tlo_pola=0x7f020011;
-        public static final int tlo_pola_odkrytego=0x7f020012;
-        public static final int usmiech=0x7f020013;
-        public static final int zdziwienie=0x7f020014;
-        public static final int zolta=0x7f020015;
+        public static final int poleodkryte_bomba=0x7f02000c;
+        public static final int poleodkryte_flaga=0x7f02000d;
+        public static final int pomaranczowe=0x7f02000e;
+        public static final int przestraszenie=0x7f02000f;
+        public static final int red=0x7f020010;
+        public static final int smiech=0x7f020011;
+        public static final int szara=0x7f020012;
+        public static final int tlo_pola=0x7f020013;
+        public static final int tlo_pola_odkrytego=0x7f020014;
+        public static final int tlo_polaodkrytego=0x7f020015;
+        public static final int usmiech=0x7f020016;
+        public static final int zdziwienie=0x7f020017;
+        public static final int zolta=0x7f020018;
     }
     public static final class id {
         public static final int TableLayout=0x7f080000;
