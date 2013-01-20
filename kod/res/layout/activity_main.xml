@@ -8,7 +8,7 @@
 
     <TableRow
         android:id="@+id/tableRow1"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
 
         <TextView
@@ -48,6 +48,15 @@
         android:minHeight="25dp" >
 
         <ImageButton
+            android:id="@+id/oprojekcie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_gravity="center"
+            android:background="@drawable/klawisz_o_projekcie"
+            android:contentDescription="cos nie dziala" />
+
+        <ImageButton
             android:id="@+id/statystyki"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,6 +64,15 @@
             android:layout_gravity="center"
             android:background="@drawable/klawisz_statystyki"
             android:contentDescription="cos nie dziala" />
+        <ImageButton
+            android:id="@+id/jakgrac"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="2"
+            android:layout_gravity="center"
+            android:background="@drawable/klawisz_jak_grac"
+            android:contentDescription="cos nie dziala" />
+        
 
     </TableRow>
 
