@@ -165,7 +165,7 @@ public class Wiadomosci {
 	public static void okienkoGra()
 	{
 		final Dialog dialog = new Dialog(context);
-		dialog.setTitle("Statystyki");
+		dialog.setTitle("Jak graæ");
 		dialog.setContentView(R.layout.statystyki);
 		String wiadomosc="\nGra polega na tym, by odkryc wszystkie niezaminowane pola.\n"
 				+"Mo¿na sobie pomagaæ, stawiaj¹c na polu symbol flagi - nale¿y u¿yæ d³ugiego klikniêcia."
