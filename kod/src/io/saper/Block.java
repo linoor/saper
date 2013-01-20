@@ -53,7 +53,7 @@ public class Block extends Button
 		{
 			setText("");
 		}
-		
+		setTextSize(15);
 		switch(liczbaMin)
 		{
 		case 1:
