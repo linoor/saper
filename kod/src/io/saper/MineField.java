@@ -243,7 +243,7 @@ public class MineField {
 	{
 		Block block = getBlocks()[row][column];
 		Random rand = new Random(36);
-		if(block.isFlagged() || block.isMined())
+		if(block.isFlagged() || block.isMined() || !block.isCovered())
 		{
 			return;
 		}
@@ -276,7 +276,7 @@ public class MineField {
 							rippleEffect(wiersz, kolumna);
 						}
 						
-					}, rand.nextLong()*4);
+					}, 10*rand.nextInt(40));
 				}
 			}
 		}
