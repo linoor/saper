@@ -16,6 +16,7 @@ import java.util.Map;
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 class Czas implements Serializable
@@ -100,7 +101,7 @@ class Dane implements Serializable{
 public class DaneGraczy {
 	private static volatile DaneGraczy Instance;
 	private DaneGraczy(){nazwaGracza="";}
-	private TextView stat;
+	private ImageButton stat;
 	private Context context;
 	private String nazwaGracza;
 	private Plansza plansza;
@@ -254,7 +255,7 @@ public class DaneGraczy {
 		}
 		return wynik;
 	}
-	public void init(Context context, TextView stat)
+	public void init(Context context, ImageButton stat)
 	{
 		this.context = context;
 		this.stat = stat;

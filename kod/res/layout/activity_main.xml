@@ -46,15 +46,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="25dp" >
-        <TextView
+
+        <ImageButton
             android:id="@+id/statystyki"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
             android:layout_gravity="center"
-            android:text="@string/statystyki"
-            android:textColor="@color/kolor_licznikow"
-            android:textSize="2mm" />
+            android:background="@drawable/klawisz_statystyki"
+            android:contentDescription="cos nie dziala" />
+
     </TableRow>
 
     <TableRow
