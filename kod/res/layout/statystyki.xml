@@ -9,6 +9,14 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true" >
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-5dp"
+            android:textColor="#FFF" />
+
     </ScrollView>
 
     <Button
@@ -19,14 +27,5 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="0dp"
         android:text="@string/ok" />
-
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/ok"
-        android:layout_marginTop="-5dp"
-        android:textColor="#FFF" />
 
 </RelativeLayout>

@@ -275,7 +275,7 @@ public class MineField {
 							rippleEffect(wiersz, kolumna);
 						}
 						
-					}, 10*rand.nextInt(40));
+					}, rand.nextInt(40));
 				}
 			}
 		}
