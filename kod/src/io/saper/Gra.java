@@ -129,6 +129,7 @@ public class Gra {
     	l.updateMineCount();
     	m.odkryjMiny();
     	DaneGraczy d = DaneGraczy.getInstance();
+    	d.update(new Integer(z.getCzas()).toString(), false);
     	Wiadomosci.showDialogBox("Niestety, "+d.getNazwaGracza()+", przegra³eœ!", z.getCzas(), false);
     	Wiadomosci.showMessage(d.najlepszyWynik());
     }
